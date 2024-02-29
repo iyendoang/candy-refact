@@ -25,14 +25,14 @@ require("config/config.candy.php");
 	<link rel='stylesheet' href='<?php echo $homeurl; ?>/plugins/sweetalert2/dist/sweetalert2.min.css'>
 </head>
 
-<body style="background: url('<?= $setting['bc'] ?>');background-size:cover;background-position: center;background-repeat: no-repeat;">
+<body style="background: url('<?= $image_background ?>');background-size:cover;background-position: center;background-repeat: no-repeat;">
 
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="animated flipInX wrap-login100" style="padding-top:30px">
 				<form id="formlogin" action="ceklogin.php" class="login100-form validate-form">
 					<span class="animated infinite pulse delay-5s login100-form-title p-b-26 ">
-						<img src="<?php echo $setting['logo']; ?>" style="max-height:50px" class="img-responsive" alt="Responsive image">
+						<img src="<?php echo $logo; ?>" style="max-height:50px" class="img-responsive" alt="Responsive image">
 					</span>
 					<span class=" login100-form-title p-b-26 ">
 						<?php echo $setting['sekolah']; ?>

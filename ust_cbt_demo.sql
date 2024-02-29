@@ -626,7 +626,7 @@ CREATE TABLE `setting` (
 --
 
 INSERT INTO `setting` (`id_setting`, `aplikasi`, `kode_sekolah`, `sekolah`, `jenjang`, `kepsek`, `nip`, `alamat`, `kecamatan`, `kota`, `telp`, `fax`, `web`, `email`, `logo`, `header`, `header_kartu`, `nama_ujian`, `versi`, `ip_server`, `waktu`, `server`, `id_server`, `url_host`, `token_api`, `sekolah_id`, `npsn`, `db_versi`, `bc`) VALUES
-(1, 'DEMO CBT', 'MTs', 'DEMO CBT', 'SD', 'Nama Kepala Sekolah', '1234567890', '', '  ', '', '', '', '', '', 'dist/img/logo33.png', '', 'KARTU PESERTA PAS GANJIL', 'PENILAIAN HARIAN', '2.9', 'http://192.168.0.200/candycbt', 'Asia/Jakarta', 'pusat', 'SR01', 'http://pts.smkhsagung.sch.id/', 'HO3FIrBYcFUMp0', '8cce47df-aae7-4274-83cb-5af3093eab56', '69787351', '2.9.3', 'dist/img/bc.png');
+(1, 'DEMO CBT', 'MTs', 'DEMO CBT', 'SD', 'Nama Kepala Sekolah', '1234567890', '', '  ', '', '', '', '', '', '', '', 'KARTU PESERTA PAS GANJIL', 'PENILAIAN HARIAN', '2.9', 'http://192.168.0.200/candycbt', 'Asia/Jakarta', 'pusat', 'SR01', 'http://pts.smkhsagung.sch.id/', 'HO3FIrBYcFUMp0', '8cce47df-aae7-4274-83cb-5af3093eab56', '69787351', '2.9.3', '');
 
 -- --------------------------------------------------------
 

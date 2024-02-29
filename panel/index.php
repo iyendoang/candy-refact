@@ -31,7 +31,7 @@ endif;
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<title>Administrator | <?= $setting['aplikasi'] ?></title>
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <link rel='shortcut icon' href='<?= $homeurl ?>/dist/img/book.ico' />
+	<link rel='shortcut icon' href='<?= $homeurl ?>/dist/img/book.ico' />
 	<link rel='stylesheet' href='<?= $homeurl ?>/dist/bootstrap/css/bootstrap.min.css' />
 	<link rel='stylesheet' href='<?= $homeurl ?>/plugins/fontawesome/css/all.css' />
 	<link rel='stylesheet' href='<?= $homeurl ?>/plugins/select2/select2.min.css' />
@@ -83,10 +83,10 @@ endif;
 		<header class='main-header'>
 			<a href='?' class='logo' style='background-color:#fff'>
 				<span class='animated bounce logo-mini'>
-					<img src="<?= $homeurl . '/' . $setting['logo'] ?>" height="30px">
+					<img src="../<?= $logo ?>" height="30px">
 				</span>
 				<span class='animated bounce logo-lg' style="color: blue;">
-					<img src="<?= $homeurl . '/' . $setting['logo'] ?>" height="40px"> <?= $setting['sekolah'] ?>
+					<img src="../<?= $logo ?>" height="40px"> <?= $setting['sekolah'] ?>
 				</span>
 			</a>
 			<nav class='navbar navbar-static-top' style='background-color:#0073b7;box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.1)' role='navigation'>
@@ -127,19 +127,19 @@ endif;
 						<li><a style="color:#fff" href='?pg=informasi'><i class="fas fa-comment-dots fa-lg  "></i></a></li>
 						<li class='dropdown user user-menu'>
 							<a href='#' class='dropdown-toggle' data-toggle='dropdown'>
-								<img src='<?= $homeurl ?>/dist/img/avatar-6.png' class='user-image' alt='+'>
+								<img src='../<?= $avatar ?>' class='user-image' alt='+'>
 								<span style="color:#fff" class='hidden-xs'><?= $pengawas['nama'] ?> &nbsp; <i class='fa fa-caret-down'></i></span>
 							</a>
 							<ul class='dropdown-menu'>
-								<li class='user-header' style="background-color: black;">
+								<li class='user-header' style="background-color: #0073b7;">
 									<?php
 									if ($pengawas['level'] == 'admin') :
-										echo "<img src='$homeurl/dist/img/avatar-6.png' class='img-circle' alt='User Image'>";
+										echo "<img src='../$avatar' class='img-circle' alt='User Image'>";
 									elseif ($pengawas['level'] == 'guru') :
 										if ($pengawas['foto'] <> '') {
 											echo "<img src='$homeurl/foto/fotoguru/$pengawas[foto]' class='img-circle' alt='User Image'>";
 										} else {
-											echo "<img src='$homeurl/dist/img/avatar-6.png' class='img-circle' alt='User Image'>";
+											echo "<img src='../$avatar' class='img-circle' alt='User Image'>";
 										}
 									endif
 									?>
@@ -252,20 +252,17 @@ endif;
 							<ul class='treeview-menu'>
 								<li><a href='?pg=banksoal'><i class='fas fa-angle-double-right fa-fw'></i> <span> Daftar Soal</span></a></li>
 								<li><a href='?pg=filependukung'><i class='fas fa-angle-double-right  fa-fw'></i> <span>File Pendukung</span></a></li>
-
 							</ul>
 						</li>
 						<li><a href='?pg=statusall'><i class="fas fa-user-friends side-menu-icon fa-fw    "></i> <span>Status Peserta</span></a></li>
-						<!-- <li><a href='?pg=jadwal'><i class="fas fa-desktop side-menu-icon fa-fw"></i> <span> Status Ujian</span></a></li> -->
 						<li class='treeview'>
 							<a href='#'><i class="fas fa-desktop side-menu-icon fa-fw"></i><span> Menu Ujian </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
-								<li><a href='?pg=jadwal'><i class='fas fa-angle-double-right fa-fw'></i> <span> Jadwak Ujian</span></a></li>
+								<li><a href='?pg=jadwal'><i class='fas fa-angle-double-right fa-fw'></i> <span> Jadwal Ujian</span></a></li>
 								<li><a href='?pg=reset'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Reset Ujian</span></a></li>
 
 							</ul>
 						</li>
-
 						<li class='treeview'>
 							<a href='#'><i class="fas fa-file-signature side-menu-icon fa-fw"></i><span> Nilai </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
@@ -334,7 +331,7 @@ endif;
 						$jenjang = 'SD/MI';
 					}
 					?>
-				</ul><!-- /.sidebar-menu -->
+				</ul>
 			</section>
 		</aside>
 
