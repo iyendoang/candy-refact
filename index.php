@@ -233,25 +233,28 @@ $tglsekarang = time();
                                                 $color = 'text-blue';
                                             }
                                             echo "
-                                                        
-                                                        
-                                                        <!-- timeline time label -->
-                                                        
-                                                        <li><i class='fa fa-envelope $bg'></i>
-                                                        <div class='timeline-item'>
-                                                        <span class='time'> <i class='fa fa-calendar'></i> " . buat_tanggal('d-m-Y', $log['date']) . " <i class='fa fa-clock-o'></i> " . buat_tanggal('h:i', $log['date']) . "</span>
-                                                        <h3 class='timeline-header' style='background-color:#f9f0d5'><a class='$color' href='#'>$log[judul]</a> <small> $user[nama]</small>
-                                                        
-                                                        </h3>
-                                                        <div class='timeline-body'>
-                                                        " . ucfirst($log['text']) . "	
-                                                        </div>
-                                                        
-                                                        </div>
-                                                        </li>
-                                            
-                                                        
-                                                    ";
+                                            <!-- timeline time label -->
+                                            <li>
+                                                <i class='fa fa-envelope $bg'></i>
+                                                <div class='timeline-item'>
+                                                    <span class='time'>
+                                                        <i class='fa fa-calendar'></i> " . buat_tanggal('d-m-Y', $log['date']) . "
+                                                        <i class='fa fa-clock-o'></i> " . buat_tanggal('h:i', $log['date']) . "
+                                                    </span>
+                                                    <h3 class='timeline-header' style='background-color:#f9f0d5'>
+                                                        <a class='$color' href='#'>$log[judul]</a> <small> $user[nama]</small>
+                                                    </h3>
+                                                    <div class='timeline-body'>
+                                                        " . ucfirst($log['text']) . "
+                                                        ";
+                                                    if (!empty($log['photo'])) {
+                                                        echo "<img src='" . $log['photo'] . "' alt='Photo' style='max-width: 400px; max-height: 400px;'>";
+                                                    }
+                                                    echo "
+                                                    </div>
+                                                </div>
+                                            </li>
+                                        ";
                                         }
                                         if ($logC == 0) {
                                             echo "<p class='text-center'>Tidak ada aktifitas.</p>";

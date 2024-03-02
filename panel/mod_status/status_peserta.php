@@ -332,7 +332,6 @@
     });
     $(document).on('click', '.hapus', function() {
         var id = $(this).data('id');
-        console.log(id);
         swal({
             title: 'Apa anda yakin?',
             text: "aksi ini akan menyelesaikan secara paksa ujian yang sedang berlangsung!",

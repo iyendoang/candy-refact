@@ -39,7 +39,15 @@ $setting['header'] = str_replace('<br />', '', $setting['header']);
                                                 <label>Nama Sekolah</label>
                                                 <input type='text' name='sekolah' value="<?= $setting['sekolah'] ?>" class='form-control' required='true' />
                                             </div>
-                                            <div class='col-md-6'>
+                                            <div class='col-md-3'>
+                                                <label>Kementerian</label>
+                                                <select name='kementerian' class='form-control' required='true'>
+                                                    <option value="<?= $setting['kementerian'] ?>"><?= $setting['kementerian'] ?></option>
+                                                    <option value='kemenag'>Kemenag</option>
+                                                    <option value='kemendikbud'>Kemendikbud</option>
+                                                </select>
+                                            </div>
+                                            <div class='col-md-3'>
                                                 <label>Kode Sekolah</label>
                                                 <input type='text' name='kode' value="<?= $setting['kode_sekolah'] ?>" class='form-control' required='true' />
                                             </div>

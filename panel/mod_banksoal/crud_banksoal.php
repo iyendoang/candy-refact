@@ -91,42 +91,41 @@ if ($pg == 'tambah') {
     }
 }
 if ($pg == 'copy_bank') {
-    $id = $_POST['idm'];
-    $mapel = mysqli_fetch_array(mysqli_query($koneksi, "select * from mapel where id_mapel='$id'"));
-    $soal = mysqli_query($koneksi, "select * from soal where id_mapel='$id'");
-    $kode = str_replace(' ', '_', $_POST['kodebank']);
-    $nama = $mapel['nama'];
-    $jml_esai = $mapel['jml_esai'];
-    $jml_soal = $mapel['jml_soal'];
-    $bobot_pg = $mapel['bobot_pg'];
-    $bobot_esai = $mapel['bobot_esai'];
-    $tampil_pg = $mapel['tampil_pg'];
-    $tampil_esai = $mapel['tampil_esai'];
-    $level = $mapel['level'];
-    $status = $mapel['status'];
-    $opsi = $mapel['opsi'];
-    $kkm = $mapel['kkm'];
-    $agama = $mapel['soal_agama'];
-    $kelas = $mapel['kelas'];
-    $id_pk = $mapel['idpk'];
-    $guru = $mapel['idguru'];
-    $cek = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM mapel WHERE  kode='$kode'"));
+    $id_mapel = $_POST['idm'];
+    $kode_bank = str_replace(' ', '_', $_POST['kodebank']);
 
-    if ($cek > 0) :
-        echo "Maaf Kode Bank Soal Sudah ada !";
-    else :
-        $exec = mysqli_query($koneksi, "INSERT INTO mapel (kode, idpk, nama, jml_soal,jml_esai,level,status,idguru,bobot_pg,bobot_esai,tampil_pg,tampil_esai,kelas,opsi,kkm,soal_agama) VALUES ('$kode','$id_pk','$nama','$jml_soal','$jml_esai','$level','$status','$guru','$bobot_pg','$bobot_esai','$tampil_pg','$tampil_esai','$kelas','$opsi','$kkm','$agama')");
-        if ($exec) {
+    $mapel_query = mysqli_query($koneksi, "SELECT * FROM mapel WHERE id_mapel='$id_mapel'");
+    $mapel = mysqli_fetch_array($mapel_query);
 
-            $id_last = mysqli_insert_id($koneksi);
+    $cek_kode_query = mysqli_query($koneksi, "SELECT * FROM mapel WHERE kode='$kode_bank'");
+    $cek_kode = mysqli_num_rows($cek_kode_query);
+
+    if ($cek_kode > 0) {
+        echo "Maaf, Kode Bank Soal sudah ada!";
+    } else {
+        $insert_mapel_query = mysqli_prepare($koneksi, "INSERT INTO mapel (kode, idpk, nama, jml_soal, jml_esai, level, status, idguru, bobot_pg, bobot_esai, tampil_pg, tampil_esai, kelas, opsi, kkm, soal_agama) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+        mysqli_stmt_bind_param($insert_mapel_query, "sissiisiiiiisssis", $kode_bank, $mapel['idpk'], $mapel['nama'], $mapel['jml_soal'], $mapel['jml_esai'], $mapel['level'], $mapel['status'], $mapel['idguru'], $mapel['bobot_pg'], $mapel['bobot_esai'], $mapel['tampil_pg'], $mapel['tampil_esai'], $mapel['kelas'], $mapel['opsi'], $mapel['kkm'], $mapel['soal_agama']);
+
+        $insert_mapel_exec = mysqli_stmt_execute($insert_mapel_query);
+
+        if ($insert_mapel_exec) {
+            $id_mapel_last = mysqli_insert_id($koneksi);
+            $insert_soal_query = mysqli_prepare($koneksi, "INSERT INTO soal (id_mapel, nomor, soal, jenis, pilA, pilB, pilC, pilD, pilE, jawaban, file, file1, fileA, fileB, fileC, fileD, fileE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
             while ($data = mysqli_fetch_array($soal)) {
-                $exec2 = mysqli_query($koneksi, "INSERT INTO soal (id_mapel,nomor,soal,jenis,pilA,pilB,pilC,pilD,pilE,jawaban,file,file1,fileA,fileB,fileC,fileD,fileE) VALUES ('$id_last','$data[nomor]','$data[soal]','$data[jenis]','$data[pilA]','$data[pilB]','$data[pilC]','$data[pilD]','$data[pilE]','$data[jawaban]','$data[file]','$data[file1]','$data[fileA]','$data[fileB]','$data[fileC]','$data[fileD]','$data[fileE]')");
+                mysqli_stmt_bind_param($insert_soal_query, "issssssssssssssss", $id_mapel_last, $data['nomor'], $data['soal'], $data['jenis'], $data['pilA'], $data['pilB'], $data['pilC'], $data['pilD'], $data['pilE'], $data['jawaban'], $data['file'], $data['file1'], $data['fileA'], $data['fileB'], $data['fileC'], $data['fileD'], $data['fileE']);
+
+                mysqli_stmt_execute($insert_soal_query);
             }
+
             echo "OK";
-            // echo $id_last;
+        } else {
+            echo "Gagal menambahkan data mapel.";
         }
-    endif;
+    }
 }
+
 if ($pg == 'hapus') {
     $kode = $_POST['kode'];
     $exec = mysqli_query($koneksi, "DELETE a.*, b.* FROM mapel a JOIN soal b ON a.id_mapel = b.id_mapel WHERE a.id_mapel in (" . $kode . "')");

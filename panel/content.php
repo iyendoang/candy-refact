@@ -13,7 +13,7 @@
 <?php elseif ($pg == 'dataujian') : ?>
     <?php include 'mod_sinkron/dataujian.php'; ?>
 <?php elseif ($pg == 'pengumuman') : ?>
-    <?php include 'pengumuman.php'; ?>
+    <?php include 'mod_pengumuman/pengumuman.php'; ?>
 <?php elseif ($pg == 'guru') : ?>
     <?php cek_session_admin(); ?>
     <?php include 'mod_guru/guru.php'; ?>

@@ -11,6 +11,7 @@ if ($pg == 'setting_app') {
         'token_api' => $_POST['token_api'],
         'aplikasi' => $_POST['aplikasi'],
         'sekolah' => $_POST['sekolah'],
+        'kementerian' => $_POST['kementerian'],
         'kode_sekolah' => $_POST['kode'],
         'jenjang' => $_POST['jenjang'],
         'kepsek' => $_POST['kepsek'],

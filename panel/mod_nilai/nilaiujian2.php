@@ -229,7 +229,20 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                                     <?php } ?>
                                                 <?php else : ?>
                                                     <?php if ($nilai['ujian_mulai'] <> '' and $nilai['ujian_selesai'] == '') { ?>
-                                                        <button data-id='<?= $nilai['id_nilai'] ?>' class='hapus btn btn-xs btn-danger'>Bantu Selesai</button>
+                                                        <?php
+                                                        $id_ujian = $nilai['id_ujian'];
+                                                        $id_siswa = $siswa['id_siswa'];
+                                                        $id_mapel = $nilai['id_mapel'];
+                                                        $rest_temp_skor = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM nilai_temp WHERE id_ujian='$id_ujian' AND id_mapel='$id_mapel
+                                                        AND id_siswa='$id_siswa"));
+                                                        if (!empty($rest_temp_skor['ujian_selesai'])) {
+                                                            $skorCheckQ = mysqli_query($koneksi, "SELECT * FROM nilai WHERE id_ujian='$id_ujian' AND id_mapel='$id_mapel' AND id_siswa='$id_siswa' LIMIT 1");
+                                                        } else {
+                                                            $skorCheckQ = mysqli_query($koneksi, "SELECT * FROM nilai_temp WHERE id_ujian='$id_ujian' AND id_mapel='$id_mapel' AND id_siswa='$id_siswa' LIMIT 1");
+                                                        }
+                                                        $newSkor = mysqli_fetch_array($skorCheckQ);
+                                                        ?>
+                                                        <button data-id='<?= $newSkor['id_nilai'] ?>' class='hapus btn btn-xs btn-danger'>Bantu Selesai</button>
                                                     <?php  } ?>
                                                 <?php endif; ?>
                                             </td>
@@ -409,7 +422,6 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
     $('#tablenilaix').dataTable();
     $(document).on('click', '.hapus', function() {
         var id = $(this).data('id');
-        console.log(id);
         swal({
             title: 'Apa anda yakin?',
             text: "aksi ini akan menyelesaikan secara paksa ujian yang sedang berlangsung!",
@@ -428,6 +440,9 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                         //$('#htmlujianselesai').html('1');
                         //toastr.options.target = '#statusfull';
                         toastr.success(data);
+                        setTimeout(function() {
+                            window.location.reload()
+                        }, 2000);
                     }
                 });
             }

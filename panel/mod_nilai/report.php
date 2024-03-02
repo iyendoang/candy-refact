@@ -40,45 +40,51 @@ for ($i = 1; $i <= $n; $i++) {
 	$batasakhir = $batas + $jumlahn;
 	if ($i == $n) {
 		echo "
-			<div class='page'>
-				<table width='100%'>
-					<tr>
-						<td width='100'><img src='$homeurl/dist/img/tutwuri.jpg' height='75'></td>
-						<td>
-							<CENTER>
-								<strong class='f12'>
-									REKAPITULASI NILAI <BR>
-									" . strtoupper($jenis['nama']) . "<BR>TAHUN PELAJARAN $ajaran
-								</strong>
-							</CENTER></td>
-							<td width='100'><img src='$homeurl/$setting[logo]' height='75'></td>
-					</tr>
-				</table>
-				<hr/>
-				<table class='detail'>
-					<tr>
-						<td>SEKOLAH/MADRASAH</td><td>:</td><td><span style='width:450px;'>&nbsp;$setting[sekolah]</span></td>
-					</tr>
-					<tr>
-						<td>UJIAN/KELAS</td><td>:</td><td><span style='width:450px;'>&nbsp;$jenis[id_jenis] / $id_kelas</span></td>
-					</tr>
-					<tr>
-						<td>MATA PELAJARAN</td><td>:</td><td colspan='4'><span style='width:450px;'>&nbsp;$mapel[nama_mapel]</span></td>
-					</tr>
-				</table>
-				<table class='it-grid it-cetak' width='100%'>
-				<tr height=40px>
-					<th width='4%'>No</th>
-					
-					<th width='17%'>No Peserta</th>
-					<th>Nama</th>
-					<th width='7%'>NPG</th>
-					<th width='7%'>NEssai</th>
-					<th width='7%'>Total</th>
-					<th width='7%'>Keterangan</th>
-				</tr>";
+    <div class='page'>
+        <table width='100%'>
+            <tr>
+                <td width='100'>";
 
+		if ($setting['kementerian'] == 'kemendikbud') {
+			echo "<img src='../../dist/img/kemendikbud.png' width='75'>";
+		} elseif ($setting['kementerian'] == 'kemenag') {
+			echo "<img src='../../dist/img/kemenag.png' width='75'>";
+		}
 
+		echo "</td>
+                <td>
+                    <center>
+                        <strong class='f12'>
+                            REKAPITULASI NILAI <br>
+                            " . strtoupper($jenis['nama']) . "<br>TAHUN PELAJARAN $ajaran
+                        </strong>
+                    </center>
+                </td>
+                <td width='100'><img src='$homeurl/$setting[logo]' height='75'></td>
+            </tr>
+        </table>
+        <hr/>
+        <table class='detail'>
+            <tr>
+                <td>SEKOLAH/MADRASAH</td><td>:</td><td><span style='width:450px;'>&nbsp;$setting[sekolah]</span></td>
+            </tr>
+            <tr>
+                <td>UJIAN/KELAS</td><td>:</td><td><span style='width:450px;'>&nbsp;$jenis[id_jenis] / $id_kelas</span></td>
+            </tr>
+            <tr>
+                <td>MATA PELAJARAN</td><td>:</td><td colspan='4'><span style='width:450px;'>&nbsp;$mapel[nama_mapel]</span></td>
+            </tr>
+        </table>
+        <table class='it-grid it-cetak' width='100%'>
+            <tr height='40px'>
+                <th width='4%'>No</th>
+                <th width='17%'>No Peserta</th>
+                <th>Nama</th>
+                <th width='7%'>NPG</th>
+                <th width='7%'>NEssai</th>
+                <th width='7%'>Total</th>
+                <th width='7%'>Keterangan</th>
+            </tr>";
 		$ckck = mysqli_query($koneksi, "SELECT * FROM siswa WHERE id_kelas='$id_kelas' order by nama limit $batas, $jumlahn");
 
 		while ($siswa = mysqli_fetch_array($ckck)) {

@@ -54,24 +54,23 @@ $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas WHERE id
                 <div style='width:10.4cm;border:1px solid #666;'>
                     <table style="text-align:center; width:100%">
                         <tr>
-                            <td style="text-align:left; vertical-align:top">
-
-                                <img src='../../foto/logo.png' height='60px'>
+                            <td style="text-align:left; vertical-align:midle">
+                                <?php if ($setting['kementerian'] == 'kemendikbud') { ?>
+                                    <img src='../../dist/img/kemendikbud.png' height='60px' style="margin-right:10px;">
+                                <?php   } ?>
+                                <?php if ($setting['kementerian'] == 'kemenag') { ?>
+                                    <img src='../../dist/img/kemenag.png' height='60px' style="margin-right:10px;">
+                                <?php   } ?>
                             </td>
                             <td style="text-align:center">
-                                <!-- <b>
-									KARTU PESERTA UJIAN<br>
-									<?= strtoupper($setting['nama_ujian']) ?><BR>
-									TAHUN PELAJARAN <?= $ajaran ?>
-								</b> -->
                                 <b class="ukuran">
                                     <?= strtoupper($setting['header_kartu']) ?><BR>
                                     <?= strtoupper($setting['sekolah']) ?><BR>
                                     TAHUN PELAJARAN <?= $ajaran ?>
                                 </b>
                             </td>
-                            <td style="text-align:right; vertical-align:top">
-                                <img src="../../<?= $setting['logo'] ?>" height='60px' />
+                            <td style="text-align:right; vertical-align:midle">
+                                <img src="../../<?= $setting['logo'] ?>" height='60px' style="margin-left:10px;" />
                             </td>
                         </tr>
                     </table>
@@ -87,9 +86,8 @@ $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas WHERE id
                                         echo "<img src='$homeurl/foto/fotosiswa/$siswa[foto]' class='img'  style='max-width:60px' >";
                                     }
                                 } else {
-                                    echo "<img src='$homeurl/dist/img/foto.svg' class='img'  style='max-width:60px' alt='+'>";
+                                    echo "<img src='$homeurl/dist/img/kemenag.png' class='img'  style='max-width:60px' alt='+'>";
                                 }
-
                                 ?>
                             </td>
                         </tr>

@@ -32,7 +32,12 @@
                             <table style="width:100%">
                                 <tr>
                                     <td rowspan='4' width='120' align='center'>
-                                        <img src='../foto/tut.jpg' width='80'>
+                                        <?php if ($setting['kementerian'] == 'kemendikbud') { ?>
+                                            <img src='../dist/img/kemendikbud.png' width='80'>
+                                        <?php   } ?>
+                                        <?php if ($setting['kementerian'] == 'kemenag') { ?>
+                                            <img src='../dist/img/kemenag.png' width='80'>
+                                        <?php   } ?>
                                     </td>
                                     <td colspan='2' align='center'>
                                         <font size='+1'>
