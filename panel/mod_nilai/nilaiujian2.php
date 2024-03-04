@@ -92,7 +92,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                     <th>Nama</th>
                                     <th>Kelas</th>
                                     <th>Lama Ujian</th>
-                                    <th>Analisis</th>
+                                    <th>Analisis PG</th>
                                     <th>Nilai PG</th>
                                     <th>Essai</th>
                                     <th>Total</th>
@@ -100,7 +100,6 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                 </tr>
                             </thead>
                             <tbody>
-
                                 <?php if (!empty($_GET['id'])) { ?>
                                     <?php while ($siswa = mysqli_fetch_array($peserta)) : ?>
                                         <?php

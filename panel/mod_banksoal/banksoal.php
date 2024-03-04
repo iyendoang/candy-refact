@@ -78,7 +78,8 @@ if ($ac == '') :
                                                         <small class='label label-danger'><?= $mapel['opsi'] ?> opsi</small>
 
                                                         Essai : <small class='label label-warning'><?= $mapel['tampil_esai'] ?>/<?= $mapel['jml_esai'] ?></small>
-                                                        <small class='label label-danger'><?= $mapel['bobot_esai'] ?> %</small></p>
+                                                        <small class='label label-danger'><?= $mapel['bobot_esai'] ?> %</small>
+                                                    </p>
                                                     <p> KKM : <small class='label label-danger'><?= $mapel['kkm'] ?></small>
                                                         Kelas : <?php
                                                                 $dataArray = unserialize($mapel['kelas']);
@@ -145,8 +146,7 @@ if ($ac == '') :
                                                     $('#copybanksoal<?= $mapel['id_mapel'] ?>').modal('hide');
                                                     setTimeout(function() {
                                                         location.reload();
-                                                    }, 2000);
-
+                                                    }, 3500);
                                                 }
                                             });
                                             return false;
@@ -1042,16 +1042,21 @@ if ($ac == '') :
                         data: "kode=" + id_array,
                         type: "POST",
                         success: function(respon) {
-                            console.log(respon);
-                            if (respon == 1) {
-                                $("input.cekpilih:checked").each(function() {
-                                    $(this).parent().parent().remove('.cekpilih').animate({
-                                        opacity: "hide"
-                                    }, "slow");
-                                })
+                            if (respon == "ujian") {
+                                swal("Gagal", "Data bank soal gagal dihapus dikarenakan sudah ada data ujian.", "error");
+                            } else if (respon == "nilai") {
+                                swal("Gagal", "Data bank soal gagal dihapus dikarenakan sudah ada data nilai pada banksoal ini.", "error");
+                            } else {
+                                swal("Sukses", "Data bank soal berhasil dihapus.", "success");
+                                setTimeout(function() {
+                                    location.reload();
+                                }, 2000);
                             }
+                        },
+                        error: function() {
+                            swal("Error", "Terjadi kesalahan saat menghapus data.", "error");
                         }
-                    })
+                    });
                 }
             });
             return false;

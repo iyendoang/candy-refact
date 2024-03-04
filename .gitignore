@@ -2,3 +2,10 @@
 *.zip
 *.txt
 admin/backup_soal/
+files/*.png
+files/*.jpg
+foto/fotoguru/*.png
+foto/fotoguru/*.jpg
+foto/pengumuman/*.png
+foto/pengumuman/*.jpg
+

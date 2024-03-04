@@ -99,7 +99,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                         <label>
                             <input type='checkbox' class='icheckbox_square-green' name='hasil' value='1' /> Hasil Tampil
                         </label>
-                        <label>
+                        <label style='display:none;'>
                             <input type='checkbox' class='icheckbox_square-green' name='reset' value='1' /> Reset Login
                         </label>
                         <label>
@@ -309,9 +309,9 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                             }
 
                             if ($mapel['reset'] == 1) {
-                                echo "<span class='badge bg-green' data-toggle='tooltip' data-placement='top' title='reset yes'>Y</span> ";
+                                echo "<span class='badge bg-green' data-toggle='tooltip' data-placement='top' title='reset yes' style='display:none;'>Y</span> ";
                             } elseif ($mapel['reset'] == 0) {
-                                echo "<span class='badge bg-red' data-toggle='tooltip' data-placement='top' title='reset no'>N</span> ";
+                                echo "<span class='badge bg-red' data-toggle='tooltip' data-placement='top' title='reset no' style='display:none;'>N</span> ";
                             }
                             if ($mapel['ulang_kkm'] == 1) {
                                 echo "<span class='badge bg-green' data-toggle='tooltip' data-placement='top' title='ulang kkm yes'>Y</span> ";
@@ -418,7 +418,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                                                                                                                     echo "checked='true'";
                                                                                                                                 } ?> /> Hasil Tampil
                                             </label>
-                                            <label>
+                                            <label style='display:none;'>
                                                 <input type='checkbox' class='icheckbox_square-green' name='reset' value='1' <?php if ($mapel['reset'] == 1) {
                                                                                                                                     echo "checked='true'";
                                                                                                                                 } ?> /> Reset Login

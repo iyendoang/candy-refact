@@ -13,8 +13,10 @@ foreach ($aresay as $id => $value) {
 }
 $skor = intval($sum) * intval($nilai['bobot_esai']) / 100;
 $total = floatval($nilai['skor']) + $skor;
+$totalcek = floatval($nilai['skor']);
 $response = array();
-if ($total > 100) {
+
+if ($sum > 100) {
 	$response['status'] = 'error';
 	$response['message'] = 'Nilai melebihi batas';
 	echo json_encode($response);

@@ -90,53 +90,41 @@ if ($pg == 'tambah') {
         endif;
     }
 }
-if ($pg == 'copy_bank') {
-    $id_mapel = $_POST['idm'];
-    $kode_bank = str_replace(' ', '_', $_POST['kodebank']);
-
-    $mapel_query = mysqli_query($koneksi, "SELECT * FROM mapel WHERE id_mapel='$id_mapel'");
-    $mapel = mysqli_fetch_array($mapel_query);
-
-    $cek_kode_query = mysqli_query($koneksi, "SELECT * FROM mapel WHERE kode='$kode_bank'");
-    $cek_kode = mysqli_num_rows($cek_kode_query);
-
-    if ($cek_kode > 0) {
-        echo "Maaf, Kode Bank Soal sudah ada!";
+if ($pg == 'hapus') {
+    $kode = $_POST['kode'];
+    // Cek apakah ada relasi dengan tabel ujian
+    $cek_relasi_query = mysqli_query($koneksi, "SELECT * FROM ujian WHERE id_mapel='$kode' AND status ='1'");
+    $cek_relasi_mapel_count = mysqli_num_rows($cek_relasi_query);
+    if ($cek_relasi_mapel_count > 0) {
+        echo "ujian";
     } else {
-        $insert_mapel_query = mysqli_prepare($koneksi, "INSERT INTO mapel (kode, idpk, nama, jml_soal, jml_esai, level, status, idguru, bobot_pg, bobot_esai, tampil_pg, tampil_esai, kelas, opsi, kkm, soal_agama) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        // Cek apakah ada relasi dengan tabel nilai
+        $cek_relasi_nilai_query = mysqli_query($koneksi, "SELECT * FROM nilai WHERE id_mapel='$kode'");
+        $cek_relasi_nilai_count = mysqli_num_rows($cek_relasi_nilai_query);
 
-        mysqli_stmt_bind_param($insert_mapel_query, "sissiisiiiiisssis", $kode_bank, $mapel['idpk'], $mapel['nama'], $mapel['jml_soal'], $mapel['jml_esai'], $mapel['level'], $mapel['status'], $mapel['idguru'], $mapel['bobot_pg'], $mapel['bobot_esai'], $mapel['tampil_pg'], $mapel['tampil_esai'], $mapel['kelas'], $mapel['opsi'], $mapel['kkm'], $mapel['soal_agama']);
-
-        $insert_mapel_exec = mysqli_stmt_execute($insert_mapel_query);
-
-        if ($insert_mapel_exec) {
-            $id_mapel_last = mysqli_insert_id($koneksi);
-            $insert_soal_query = mysqli_prepare($koneksi, "INSERT INTO soal (id_mapel, nomor, soal, jenis, pilA, pilB, pilC, pilD, pilE, jawaban, file, file1, fileA, fileB, fileC, fileD, fileE) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-            while ($data = mysqli_fetch_array($soal)) {
-                mysqli_stmt_bind_param($insert_soal_query, "issssssssssssssss", $id_mapel_last, $data['nomor'], $data['soal'], $data['jenis'], $data['pilA'], $data['pilB'], $data['pilC'], $data['pilD'], $data['pilE'], $data['jawaban'], $data['file'], $data['file1'], $data['fileA'], $data['fileB'], $data['fileC'], $data['fileD'], $data['fileE']);
-
-                mysqli_stmt_execute($insert_soal_query);
-            }
-
-            echo "OK";
+        if ($cek_relasi_nilai_count > 0) {
+            echo "nilai";
         } else {
-            echo "Gagal menambahkan data mapel.";
+            // Cek apakah ada relasi dengan tabel nilai_temp
+            $cek_relasi_nilai_temp_query = mysqli_query($koneksi, "SELECT * FROM nilai_temp WHERE id_mapel='$kode'");
+            $cek_relasi_nilai_temp_count = mysqli_num_rows($cek_relasi_nilai_temp_query);
+            if ($cek_relasi_nilai_temp_count > 0) {
+                echo "nilai";
+            } else {
+                // Hapus data dari tabel soal dan mapel
+                $exec = mysqli_query($koneksi, "DELETE a.*, b.* FROM mapel a JOIN soal b ON a.id_mapel = b.id_mapel WHERE a.id_mapel in (" . $kode . "')");
+                $exec = mysqli_query($koneksi, "DELETE FROM soal WHERE id_mapel in (" . $kode . ")");
+                $exec = mysqli_query($koneksi, "DELETE FROM mapel  WHERE id_mapel in (" . $kode . ")");
+                if ($exec) {
+                    echo 1;
+                } else {
+                    echo 0;
+                }
+            }
         }
     }
 }
 
-if ($pg == 'hapus') {
-    $kode = $_POST['kode'];
-    $exec = mysqli_query($koneksi, "DELETE a.*, b.* FROM mapel a JOIN soal b ON a.id_mapel = b.id_mapel WHERE a.id_mapel in (" . $kode . "')");
-    $exec = mysqli_query($koneksi, "DELETE FROM soal WHERE id_mapel in (" . $kode . ")");
-    $exec = mysqli_query($koneksi, "DELETE FROM mapel  WHERE id_mapel in (" . $kode . ")");
-    if ($exec) {
-        echo 1;
-    } else {
-        echo 0;
-    }
-}
 if ($pg == 'simpan_soal') {
     $nomor = $_POST['nomor'];
     $jenis = $_POST['jenis'];
@@ -323,4 +311,67 @@ if ($pg == 'kosongsoal') {
     $id = $_POST['id'];
     $exec = delete($koneksi, 'soal', ['id_mapel' => $id]);
     echo $exec;
+}
+if ($pg == 'copy_bank') {
+    $id = $_POST['idm'];
+    $mapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel WHERE id_mapel='$id'"));
+    $soal = mysqli_query($koneksi, "SELECT * FROM soal WHERE id_mapel='$id'");
+    $kode = str_replace(' ', '_', $_POST['kodebank']);
+    $nama = $mapel['nama'];
+    $jml_esai = $mapel['jml_esai'];
+    $jml_soal = $mapel['jml_soal'];
+    $bobot_pg = $mapel['bobot_pg'];
+    $bobot_esai = $mapel['bobot_esai'];
+    $tampil_pg = $mapel['tampil_pg'];
+    $tampil_esai = $mapel['tampil_esai'];
+    $level = $mapel['level'];
+    $status = $mapel['status'];
+    $opsi = $mapel['opsi'];
+    $kkm = $mapel['kkm'];
+    $agama = $mapel['soal_agama'];
+    $kelas = $mapel['kelas'];
+    $id_pk = $mapel['idpk'];
+    $guru = $mapel['idguru'];
+    $cek = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM mapel WHERE  kode='$kode'"));
+    if ($cek > 0) {
+        echo "Maaf Kode Bank Soal Sudah ada !";
+    } else {
+        $exec = mysqli_query($koneksi, "INSERT INTO mapel (kode, idpk, nama, jml_soal, jml_esai, level, status, idguru, bobot_pg, bobot_esai, tampil_pg, tampil_esai, kelas, opsi, kkm, soal_agama) VALUES ('$kode','$id_pk','$nama','$jml_soal','$jml_esai','$level','$status','$guru','$bobot_pg','$bobot_esai','$tampil_pg','$tampil_esai','$kelas','$opsi','$kkm','$agama')");
+        if ($exec) {
+            $id_last = mysqli_insert_id($koneksi);
+            $soal_duplicate_values = [];
+            while ($data = mysqli_fetch_assoc($soal)) {
+                $nomor = mysqli_real_escape_string($koneksi, $data['nomor']);
+                $soal_escaped = mysqli_real_escape_string($koneksi, $data['soal']);
+                $jenis = mysqli_real_escape_string($koneksi, $data['jenis']);
+                $pilA = mysqli_real_escape_string($koneksi, $data['pilA']);
+                $pilB = mysqli_real_escape_string($koneksi, $data['pilB']);
+                $pilC = mysqli_real_escape_string($koneksi, $data['pilC']);
+                $pilD = mysqli_real_escape_string($koneksi, $data['pilD']);
+                $pilE = mysqli_real_escape_string($koneksi, $data['pilE']);
+                $jawaban = mysqli_real_escape_string($koneksi, $data['jawaban']);
+                $file = mysqli_real_escape_string($koneksi, $data['file']);
+                $file1 = mysqli_real_escape_string($koneksi, $data['file1']);
+                $fileA = mysqli_real_escape_string($koneksi, $data['fileA']);
+                $fileB = mysqli_real_escape_string($koneksi, $data['fileB']);
+                $fileC = mysqli_real_escape_string($koneksi, $data['fileC']);
+                $fileD = mysqli_real_escape_string($koneksi, $data['fileD']);
+                $fileE = mysqli_real_escape_string($koneksi, $data['fileE']);
+                $soal_duplicate_values[] = "('$id_last','$nomor','$soal_escaped','$jenis','$pilA','$pilB','$pilC','$pilD','$pilE','$jawaban','$file','$file1','$fileA','$fileB','$fileC','$fileD','$fileE')";
+            }
+            if (!empty($soal_duplicate_values)) {
+                $soal_duplicate_query = "INSERT INTO soal (id_mapel,nomor,soal,jenis,pilA,pilB,pilC,pilD,pilE,jawaban,file,file1,fileA,fileB,fileC,fileD,fileE) VALUES " . implode(",", $soal_duplicate_values);
+                $exec2 = mysqli_query($koneksi, $soal_duplicate_query);
+                if ($exec2) {
+                    echo "OK";
+                } else {
+                    echo "Gagal menggandakan soal.";
+                }
+            } else {
+                echo "Tidak ada soal untuk digandakan bank soal tetap terbuat tanpa soal.";
+            }
+        } else {
+            echo "Gagal menambahkan data mapel.";
+        }
+    }
 }

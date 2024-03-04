@@ -48,7 +48,7 @@ if($nilai_temp['ujian_selesai'<>""]){
                 <th>Kelas</th>
                 <th>Mapel</th>
                 <th>Lama Ujian</th>
-                <th>Jawaban</th>
+                <th>Jawaban PG</th>
                 <th>Nilai</th>
                 <th>Ip Address</th>
                 <th>Status</th>

@@ -76,7 +76,12 @@ if (isset($_GET['pg'])) {
 						
 						</h3>
 						<div class='timeline-body'>
-						" . ucfirst($log['text']) . "	
+						" . ucfirst($log['text']) . "
+						";
+						if (!empty($log['photo'])) {
+							echo "<img src='" . '../'. $log['photo'] . "' alt='Photo' style='max-width: 400px; max-height: 400px;'>";
+						}
+						echo "
 						</div>
 						
 						</div>
@@ -116,7 +121,12 @@ if (isset($_GET['pg'])) {
 						
 						</h3>
 						<div class='timeline-body'>
-						" . ucfirst($log['text']) . "	
+						" . ucfirst($log['text']) . "
+						";
+						if (!empty($log['photo'])) {
+							echo "<img src='" . '../'. $log['photo'] . "' alt='Photo' style='max-width: 400px; max-height: 400px;'>";
+						}
+						echo "
 						</div>
 						
 						</div>

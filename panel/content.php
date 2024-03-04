@@ -49,7 +49,7 @@
 <?php elseif ($pg == 'rekapabsen') : ?>
     <?php include 'mod_absen/rekap_absen.php'; ?>
 <?php elseif ($pg == 'absenperhari') : ?>
-    <?php include 'mod_absen/rekapabsenharian.php'; ?>	
+    <?php include 'mod_absen/rekapabsenharian.php'; ?>
 <?php elseif ($pg == 'siswa') : ?>
     <?php include 'mod_siswa/siswa.php'; ?>
 <?php elseif ($pg == 'uplfotosiswa') : ?>
@@ -65,7 +65,7 @@
     <?php cek_session_guru(); ?>
     <?php include 'mod_walas/progress.php'; ?>
 <?php elseif ($pg == 'rekap') : ?>
-<!--    <?php cek_session_guru(); ?> -->
+    <!--    <?php cek_session_guru(); ?> -->
     <?php include 'mod_walas/rekap_ujian.php'; ?>
 <?php elseif ($pg == 'importguru') : ?>
     <?php
@@ -240,7 +240,15 @@
                             </div>
                             <div class='form-group'>
                                 <label>Ruang</label>
-                                <input type='text' name='ruang' class='form-control' required='true' />
+                                <select name="ruang" id="ruang" class='form-control' required>
+                                    <option value="">Pilih Ruang</option>
+                                    <?php
+                                    $q_ruang = mysqli_query($koneksi, "SELECT * FROM ruang");
+                                    while ($data_ruang = mysqli_fetch_array($q_ruang)) {
+                                        echo "<option value='" . $data_ruang['kode_ruang'] . "'>" . $data_ruang['keterangan'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
                             </div>
                             <div class='form-group'>
                                 <div class='row'>
@@ -307,7 +315,15 @@
                             </div>
                             <div class='form-group'>
                                 <label>Ruang</label>
-                                <input type='text' name='ruang' value="<?= $value['ruang'] ?>" class='form-control' required='true' />
+                                <select name="ruang" id="ruang" class='form-control' required>
+                                    <option value="<?= $value['ruang'] ?>"><?= $value['ruang'] ?></option>
+                                    <?php
+                                    $q_ruang = mysqli_query($koneksi, "SELECT * FROM ruang");
+                                    while ($data_ruang = mysqli_fetch_array($q_ruang)) {
+                                        echo "<option value='" . $data_ruang['kode_ruang'] . "'>" . $data_ruang['keterangan'] . "</option>";
+                                    }
+                                    ?>
+                                </select>
                             </div>
                             <div class='form-group'>
                                 <div class='row'>
@@ -472,14 +488,14 @@
 <?php elseif ($pg == 'pengaturan') : ?>
     <?php include "mod_setting/setting.php"; ?>
 <?php elseif ($pg == 'statusall') : ?>
- 
+
     <?php include "mod_status/status_peserta.php"; ?>
-	
+
 <?php elseif ($pg == 'statussiswa') : ?>
- 
+
     <?php include "mod_status/status_peserta.php"; ?>
-	
-	
+
+
 <?php else : ?>
     <div class='error-page'>
         <h2 class='headline text-yellow'> 404</h2>

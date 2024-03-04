@@ -240,7 +240,12 @@ $date = date_create($cektanggal['tgl_ujian']);
     <div class='page'>
         <table width='100%'>
             <tr>
-                <td width='100'><img src='../../foto/tut.jpg' width='80'></td>
+                <?php if ($setting['kementerian'] == 'kemendikbud') { ?>
+                    <td width='100'><img src='../../dist/img/kemendikbud.png' width='80'></td>
+                <?php   } ?>
+                <?php if ($setting['kementerian'] == 'kemenag') { ?>
+                    <td width='100'><img src='../../dist/img/kemenag.png' width='80'></td>
+                <?php   } ?>
                 <td style="text-align:center">
                     <strong class='f12'>
                         DAFTAR HADIR PESERTA <BR>

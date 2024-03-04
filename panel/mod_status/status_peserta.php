@@ -49,9 +49,7 @@
                     <!-- <a href="?pg=banksoal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
                 </div>
             </div>
-
-
-            <div class="col-lg-2">
+            <div class="col-lg-4">
                 <div class="small-box bg-green ">
                     <div class="inner">
                         Sedang Ujian<h3><i class="fas fa-user    "></i> <?= $ikut ?></h3>
@@ -62,7 +60,7 @@
                     <!-- <a href="?pg=banksoal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
                 </div>
             </div>
-            <div class="col-lg-2">
+            <div class="col-lg-4">
                 <div class="small-box bg-red ">
                     <div class="inner">
                         Belum Ujian<h3><i class="fas fa-user    "></i> <?= $peserta - $ikut ?></h3>
@@ -73,8 +71,7 @@
                     <!-- <a href="?pg=banksoal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
                 </div>
             </div>
-            <div class="col-lg-2">
-
+            <div class="col-lg-4">
                 <iframe name='printabsen' src='mod_status/print_absen.php?id=<?= enkripsi($_GET['id']) ?>' style='display:none'></iframe>
                 <a role="button" onclick="frames['printabsen'].print()">
                     <div class="small-box bg-primary ">
@@ -91,8 +88,8 @@
                     </div>
                 </a>
             </div>
-            <div class="col-lg-2">
-                <a href="?pg=beritaujian&id=<?= enkripsi($_GET['id']) ?>">
+            <!-- <div class="col-lg-2">
+                <a href="?pg=beritaacara&id=<?= enkripsi($_GET['id']) ?>">
                     <div class="small-box bg-purple ">
                         <div class="inner">
                             Cetak Berita Acara
@@ -101,13 +98,13 @@
                             </center>
                         </div>
                         <div class="icon">
-                            <!-- <i class="fa fa-file"></i> -->
+                            <i class="fa fa-file"></i>
                         </div>
-                        <!-- <a href="?pg=banksoal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+                        <a href="?pg=banksoal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </a>
-            </div>
-            <div class="col-lg-2">
+            </div> -->
+            <!-- <div class="col-lg-2">
                 <a href="mod_status/report_excel.php?m=<?= $_GET['id'] ?>">
                     <div class="small-box bg-green ">
                         <div class="inner">
@@ -117,12 +114,12 @@
                             </center>
                         </div>
                         <div class="icon">
-                            <!-- <i class="fa fa-file"></i> -->
+                            <i class="fa fa-file"></i>
                         </div>
-                        <!-- <a href="?pg=banksoal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> -->
+                        <a href="?pg=banksoal" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                 </a>
-            </div>
+            </div> -->
         <?php } ?>
         <div class='col-md-12'>
 
@@ -189,7 +186,7 @@
                                         <th>Kelas</th>
                                         <th>Mapel</th>
                                         <th>Lama Ujian</th>
-                                        <th>Jawaban</th>
+                                        <th>Jawaban PG</th>
                                         <th>Nilai</th>
                                         <th>Ip Address</th>
                                         <th>Status</th>

@@ -50,7 +50,17 @@ if (isset($_GET['pg'])) {
         if ($input['action'] === 'edit') {
             mysqli_query($koneksi, "UPDATE mata_pelajaran SET nama_mapel='" . $input['namamapel'] . "' WHERE kode_mapel='" . $input['id'] . "'");
         } else if ($input['action'] === 'delete') {
-            mysqli_query($koneksi, "delete from  mata_pelajaran WHERE kode_mapel='" . $input['id'] . "'");
+            $cek_relasi_query = mysqli_query($koneksi, "SELECT * FROM mapel WHERE nama='" . $input['id'] . "'");
+            if (mysqli_num_rows($cek_relasi_query) > 0) {
+                echo "Tidak dapat menghapus karena masih ada data terkait.";
+            } else {
+                $delete_query = mysqli_query($koneksi, "DELETE FROM mata_pelajaran WHERE kode_mapel='" . $input['id'] . "'");
+                if ($delete_query) {
+                    echo "Data berhasil dihapus.";
+                } else {
+                    echo "Gagal menghapus data.";
+                }
+            }
         }
     }
     if ($pg == 'ruang') {
