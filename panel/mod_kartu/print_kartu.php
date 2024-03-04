@@ -5,6 +5,7 @@
     }
 </style>
 <?php
+
 require("../../config/config.default.php");
 require("../../config/config.function.php");
 require("../../config/functions.crud.php");
