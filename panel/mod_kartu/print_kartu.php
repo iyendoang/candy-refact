@@ -56,10 +56,10 @@ $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas WHERE id
                         <tr>
                             <td style="text-align:left; vertical-align:midle">
                                 <?php if ($setting['kementerian'] == 'kemendikbud') { ?>
-                                    <img src='../../dist/img/kemendikbud.png' height='60px' style="margin-right:10px;">
+                                    <img src='../../dist/img/kemendikbud.png' height='52px' style="margin-left:10px; margin-top:4px;">
                                 <?php   } ?>
                                 <?php if ($setting['kementerian'] == 'kemenag') { ?>
-                                    <img src='../../dist/img/kemenag.png' height='60px' style="margin-right:10px;">
+                                    <img src='../../dist/img/kemenag.png' height='52px' style="margin-left:10px; margin-top:4px;">
                                 <?php   } ?>
                             </td>
                             <td style="text-align:center">
@@ -70,7 +70,7 @@ $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas WHERE id
                                 </b>
                             </td>
                             <td style="text-align:right; vertical-align:midle">
-                                <img src="../../<?= $setting['logo'] ?>" height='60px' style="margin-left:10px;" />
+                                <img src="../../<?= $setting['logo'] ?>" height='52px' style="margin-right:10px; margin-top:4px;" />
                             </td>
                         </tr>
                     </table>
@@ -86,7 +86,7 @@ $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas WHERE id
                                         echo "<img src='$homeurl/foto/fotosiswa/$siswa[foto]' class='img'  style='max-width:60px' >";
                                     }
                                 } else {
-                                    echo "<img src='$homeurl/dist/img/kemenag.png' class='img'  style='max-width:60px' alt='+'>";
+                                    echo "<img src='$homeurl/dist/img/foto.svg' class='img'  style='max-width:60px' alt='+'>";
                                 }
                                 ?>
                             </td>
@@ -133,7 +133,7 @@ $kelas = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM kelas WHERE id
                     </table>
                 </div>
                 <?php if (($no % 8) == 0) : ?>
-                    <div style='page-break-before:always;'></div>
+                    <div style='page-break-after:always;'></div>
                 <?php endif; ?>
             </td>
             <?php if (($no % 2) == 0) : ?>
