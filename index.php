@@ -37,7 +37,6 @@ $tglsekarang = time();
     <script src='<?= $homeurl ?>/plugins/jQuery/jquery-2.2.3.min.js'></script>
     <script src='<?= $homeurl ?>/plugins/tinymce/tinymce.min.js'></script>
     <link rel='stylesheet' href='<?= $homeurl ?>/dist/css/costum.css' />
-   
 
     <style>
         @font-face {

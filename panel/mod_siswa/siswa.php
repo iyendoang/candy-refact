@@ -162,7 +162,15 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                             <div class='col-md-6'>
                                                 <div class='form-group'>
                                                     <label>Agama</label>
-                                                    <input type='text' name='agama' class='form-control' required='true' />
+                                                    <select name='agama' class='form-control' required='true'>
+                                                        <option value=''>Pilih Agama</option>
+                                                        <option value='islam'>islam</option>
+                                                        <option value='katolik'>katolik</option>
+                                                        <option value='protestan'>protestan</option>
+                                                        <option value='hindu'>hindu</option>
+                                                        <option value='budha'>budha</option>
+                                                        <option value='konghuchu'>konghuchu</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                         </div>
@@ -335,7 +343,15 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                             <div class='col-md-6'>
                                 <div class='form-group'>
                                     <label>Agama</label>
-                                    <input type='text' name='agama' class='form-control' value="<?= $siswa['agama'] ?>" required='true' />
+                                    <select name='agama' class='form-control' required='true'>
+                                        <option value='<?= $siswa['agama'] ?>'><?= $siswa['agama'] ?></option>
+                                        <option value='islam'>islam</option>
+                                        <option value='katolik'>katolik</option>
+                                        <option value='protestan'>protestan</option>
+                                        <option value='hindu'>hindu</option>
+                                        <option value='budha'>budha</option>
+                                        <option value='konghuchu'>konghuchu</option>
+                                    </select>
                                 </div>
                             </div>
                         </div>

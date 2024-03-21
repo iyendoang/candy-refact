@@ -31,11 +31,34 @@ if ($pg == 'ubah') {
     $kelas = serialize($_POST['kelas']);
     $idpk = serialize($id_pk);
     if ($pengawas['level'] == 'admin') {
+        // $exec = mysqli_query($koneksi, "UPDATE mapel SET kode='$kode', idpk='$idpk',nama='$nama',level='$level',jml_soal='$jml_soal',jml_esai='$jml_esai',status='$status',idguru='$guru',kkm='$kkm',soal_agama='$agama',bobot_pg='$bobot_pg',bobot_esai='$bobot_esai',tampil_pg='$tampil_pg',tampil_esai='$tampil_esai',kelas='$kelas',opsi='$opsi' WHERE id_mapel='$id'");
+        // if ($exec) {
+        //     echo "OK";
+        // }
+        $check_query = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM ujian WHERE id_mapel='$id'");
+        $row = mysqli_fetch_assoc($check_query);
+        $total = $row['total'];
+
+        if ($total > 0) {
+            mysqli_query($koneksi, "UPDATE ujian SET soal_agama='$agama' WHERE id_mapel='$id'");
+        }
+
         $exec = mysqli_query($koneksi, "UPDATE mapel SET kode='$kode', idpk='$idpk',nama='$nama',level='$level',jml_soal='$jml_soal',jml_esai='$jml_esai',status='$status',idguru='$guru',kkm='$kkm',soal_agama='$agama',bobot_pg='$bobot_pg',bobot_esai='$bobot_esai',tampil_pg='$tampil_pg',tampil_esai='$tampil_esai',kelas='$kelas',opsi='$opsi' WHERE id_mapel='$id'");
+
         if ($exec) {
             echo "OK";
+        } else {
+            echo "Gagal melakukan update";
         }
     } elseif ($pengawas['level'] == 'guru') {
+        $check_query = mysqli_query($koneksi, "SELECT COUNT(*) AS total FROM ujian WHERE id_mapel='$id'");
+        $row = mysqli_fetch_assoc($check_query);
+        $total = $row['total'];
+
+        if ($total > 0) {
+            mysqli_query($koneksi, "UPDATE ujian SET soal_agama='$agama' WHERE id_mapel='$id'");
+        }
+        
         $exec = mysqli_query($koneksi, "UPDATE mapel SET kode='$kode', idpk='$idpk',nama='$nama',level='$level',jml_soal='$jml_soal',jml_esai='$jml_esai',status='$status',kkm='$kkm',soal_agama='$agama',bobot_pg='$bobot_pg',bobot_esai='$bobot_esai',tampil_pg='$tampil_pg',tampil_esai='$tampil_esai',kelas='$kelas',opsi='$opsi' WHERE id_mapel='$id'");
         if ($exec) {
             echo "OK";

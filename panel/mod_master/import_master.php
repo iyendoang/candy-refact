@@ -38,7 +38,7 @@ if (isset($_FILES['file']['name'])) {
             $password = $sheetData[$i]['10'];
             $foto = $sheetData[$i]['11'];
             $server = $sheetData[$i]['12'];
-            $agama = $sheetData[$i]['13'];
+            $agama = strtolower($sheetData[$i]['13']);
             $nohp = $sheetData[$i]['14'];
             $qkelas = mysqli_query($koneksi, "SELECT id_kelas FROM kelas WHERE id_kelas='$kelas'");
             $cekkelas = mysqli_num_rows($qkelas);

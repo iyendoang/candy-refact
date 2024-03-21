@@ -305,10 +305,11 @@ if ($ac == '') :
                                                                     <select name='agama' class='form-control'>
                                                                         <option value=''>Bukan Soal Agama</option>
                                                                         <?php
-                                                                        $agam = mysqli_query($koneksi, "SELECT * FROM siswa group by agama");
-                                                                        while ($agama = mysqli_fetch_array($agam)) : ($agama['agama'] == $mapel['soal_agama']) ? $s = 'selected' : $s = '';
-                                                                            echo "<option value='" . $agama['agama'] . "' $s>$agama[agama]</option>";
-                                                                        endwhile;
+                                                                        $agam = mysqli_query($koneksi, "SELECT * FROM siswa WHERE agama != '' GROUP BY agama");
+                                                                        while ($agama = mysqli_fetch_array($agam)) {
+                                                                            $s = ($agama['agama'] == $mapel['soal_agama']) ? 'selected' : '';
+                                                                            echo "<option value='" . $agama['agama'] . "' $s>" . $agama['agama'] . "</option>";
+                                                                        }
                                                                         ?>
                                                                     </select>
                                                                 </div>
@@ -324,7 +325,6 @@ if ($ac == '') :
                                                     </div>
                                                     <div class='modal-footer'>
                                                         <button type='submit' name='editbanksoal' class='btn btn-sm btn-flat btn-success'><i class='fa fa-check'></i> Simpan</button>
-
                                                     </div>
                                                 </form>
                                             </div>
@@ -348,7 +348,6 @@ if ($ac == '') :
                                                     setTimeout(function() {
                                                         location.reload();
                                                     }, 2000);
-
                                                 }
                                             });
                                             return false;

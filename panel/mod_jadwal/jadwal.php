@@ -138,7 +138,8 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                     $jadwal = mysqli_query($koneksi, "SELECT * FROM ujian ORDER BY tgl_ujian ASC, waktu_ujian ASC");
                                 } else {
                                     $jadwal = mysqli_query($koneksi, "SELECT * FROM ujian where id_guru='$id_pengawas' ORDER BY tgl_ujian ASC, waktu_ujian ASC");
-                                } ?>
+                                }
+                                ?>
                                 <?php while ($ujian = mysqli_fetch_array($jadwal)) : ?>
 
                                     <option value="<?= $ujian['id_ujian'] ?>"><?= $ujian['kode_nama'] . " - " . $ujian['nama'] ?></option>
@@ -231,9 +232,9 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                 <?php while ($mapel = mysqli_fetch_array($mapelQ)) : ?>
                     <?php if ($mapel['tgl_ujian'] > date('Y-m-d H:i:s') and $mapel['tgl_selesai'] > date('Y-m-d H:i:s')) {
                         $color = "bg-gray";
-                        $status = "BELUM MULAI";
+                        $status = "<i class='fa fa-pause'></i> BELUM MULAI";
                     } elseif ($mapel['tgl_ujian'] < date('Y-m-d H:i:s') and $mapel['tgl_selesai'] > date('Y-m-d H:i:s')) {
-                        $color = "bg-blue";
+                        $color = "bg-green";
                         $status = "<i class='fa fa-spinner fa-spin'></i> MULAI UJIAN";
                     } else {
                         $color = "bg-red";
@@ -277,12 +278,12 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                             ?>
                         </td>
                         <td>
-                            <small class='badge bg-yellow'>
+                            <small class='badge bg-blue'>
                                 <?= $mapel['tampil_pg'] ?> Soal / <?= $mapel['lama_ujian'] ?> m / <?= $mapel['opsi'] ?> opsi</small>
                         </td>
                         <td>
-                            <small class="text-green"> <?= $mapel['tgl_ujian'] ?></small><br>
-                            <small class="text-red"><?= $mapel['tgl_selesai'] ?></small>
+                            <small class="fw-bold text-green"> <?= $mapel['tgl_ujian'] ?></small><br>
+                            <small class="fw-bold text-red"><?= $mapel['tgl_selesai'] ?></small>
                         </td>
 
                         <td>
@@ -330,16 +331,14 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                             ?>
                         </td>
                         <td style="text-align:center">
-                            <?=
-                                $status
-                            ?> <br>
+                            <span class="badge <?= $color ?>"><?= $status  ?></span> <br>
                             <i class="fa fa-circle text-green" data-toggle="tooltip" title="Peserta Online"></i>
                             <?=
-                                $useronline = mysqli_num_rows(mysqli_query($koneksi, "select * from nilai where id_mapel='$mapel[id_mapel]' and id_ujian='$mapel[id_ujian]' and ujian_selesai is null"));
+                            $useronline = mysqli_num_rows(mysqli_query($koneksi, "select * from nilai where id_mapel='$mapel[id_mapel]' and id_ujian='$mapel[id_ujian]' and ujian_selesai is null"));
                             ?>
                             <i class="fa fa-circle text-danger" data-toggle="tooltip" title="Peserta Offline"></i>
                             <?=
-                                $userend = mysqli_num_rows(mysqli_query($koneksi, "select * from nilai where id_mapel='$mapel[id_mapel]' and id_ujian='$mapel[id_ujian]' and ujian_selesai <> ''"));
+                            $userend = mysqli_num_rows(mysqli_query($koneksi, "select * from nilai where id_mapel='$mapel[id_mapel]' and id_ujian='$mapel[id_ujian]' and ujian_selesai <> ''"));
                             ?>
                         </td>
                         <td style="text-align:center">
@@ -434,7 +433,6 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                                         <center>
                                             <button type="submit" class='btn btn-primary' name='simpan'><i class='fa fa-save'></i> Ganti Waktu Ujian</button>
                                         </center>
-
                                     </div>
                                 </form>
                             </div>

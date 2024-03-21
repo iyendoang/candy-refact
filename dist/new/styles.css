@@ -1,0 +1,259 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    background-color: lightgray !important;
+    user-select: none;
+}
+
+a {
+    color: #232b2b;
+    text-decoration: none;
+}
+
+header {
+    background-color: #4663AC;
+    height: 200px;
+}
+
+header .auth-logo {
+    width: 400px;
+    margin-bottom: 0px;
+    margin-top: 30px;
+}
+
+header .btn-logout {
+    width: 200px;
+    padding-top: 8px;
+    height: 50px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin-top: 60px;
+}
+
+main {
+    margin-top: -45px;
+}
+
+main .soal {
+    border-radius: 15px;
+    padding: 30px;
+}
+
+main .number {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main .number .no {
+    flex: 1 0 21%;
+    margin: 5px;
+}
+
+main .number .no .btn {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: #000;
+}
+
+main .sudah {
+    background-color: #6fc276;
+}
+
+main .bysoal {
+    border-radius: 15px;
+    padding: 30px;
+}
+
+main .bysoal h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+}
+
+main .bysoal .timer {
+    height: 35px;
+    width: 200px;
+    background-color: #FF6961;
+    border-radius: 10px;
+    /* padding: 4px; */
+    color: #fefefe;
+    margin-top: -5px;
+}
+
+main .bysoal .timer i {
+    margin-top: 8px;
+}
+
+main .bysoal .timer small {
+    margin-top: 7px;
+}
+
+main .bysoal .jawaban {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main .bysoal .jawaban .option {
+    flex: 0 47%;
+    margin: 9px;
+}
+
+main .bysoal .jawaban .option .btn {
+    width: 40px;
+    height: 40px;
+    margin-right: 20px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+main .bysoal .jawaban .option p {
+    margin-top: 10px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 15px;
+    margin-left: 60px;
+}
+
+main .bysoal .jawaban .option .pilih label,
+main .bysoal .jawaban .option .pilih input {
+    display: block;
+    position: absolute;
+}
+
+main .bysoal .jawaban .option .pilih input[type="radio"] {
+    opacity: 0.01;
+    z-index: 100;
+}
+
+main .bysoal .jawaban .option .pilih input[type="radio"]:checked+label,
+.Checked+label {
+    background: #198754;
+    color: #fefefe;
+}
+
+main .bysoal .jawaban .option .pilih label {
+    cursor: pointer;
+    z-index: 90;
+}
+
+main .auth {
+    border-radius: 15px;
+    padding: 30px;
+}
+
+main .auth h2 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 25px;
+    text-align: center;
+}
+
+main .auth .masukan {
+    height: 44px;
+    border-radius: 15px;
+}
+
+main .btn-auth {
+    width: 100%;
+    padding-top: 8px;
+    height: 50px;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    background-color: #454545;
+    color: #fefefe;
+    margin-top: 20px;
+}
+
+main .btn-auth:hover {
+    border: 3px #454545 solid;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+footer {
+    margin-top: 30px;
+}
+
+footer .text-footer {
+    color: #454545;
+}
+/* CSS untuk layar kecil (<= 576px) */
+@media (max-width: 576px) {
+    header .auth-logo {
+        width: 250px;
+        margin-top: 20px;
+        margin-bottom: 20px;
+    }
+
+    main .col-5 {
+        width: 100%;
+    }
+
+    main .auth {
+        padding: 20px;
+    }
+
+    main .btn-auth {
+        width: 100%;
+    }
+
+    footer .text-footer {
+        font-size: 12px;
+    }
+}
+
+/* CSS untuk layar sedang (577px - 768px) */
+@media (min-width: 577px) and (max-width: 768px) {
+    header .auth-logo {
+        width: 300px;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    main .col-5 {
+        width: 80%;
+    }
+
+    main .auth {
+        padding: 30px;
+    }
+
+    main .btn-auth {
+        width: 100%;
+    }
+
+    footer .text-footer {
+        font-size: 14px;
+    }
+}
+
+/* CSS untuk layar besar (>= 769px) */
+@media (min-width: 769px) {
+    header .auth-logo {
+        width: 400px;
+        margin-top: 50px;
+        margin-bottom: 50px;
+    }
+
+    main .col-5 {
+        width: 50%;
+    }
+
+    main .auth {
+        padding: 40px;
+    }
+
+    main .btn-auth {
+        width: 100%;
+    }
+
+    footer .text-footer {
+        font-size: 16px;
+    }
+}
