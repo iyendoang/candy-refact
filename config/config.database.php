@@ -1,11 +1,9 @@
 <?php
-//konfigurasi server database
-$host = 'localhost';
-$user = 'root';
-$pass = '';
-$debe = 'candy_refactor';
-// $debe = 'candy_test';
-
+$env = parse_ini_file('../.env');
+$host = $env['DB_HOST'];
+$user = $env['DB_USER'];
+$pass = $env['DB_PASS'];
+$debe = $env['DB_NAME'];
 $koneksi = mysqli_connect($host, $user, $pass, "");
 if ($koneksi) {
 	$pilihdb = mysqli_select_db($koneksi, $debe);

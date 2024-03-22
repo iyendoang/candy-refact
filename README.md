@@ -45,4 +45,6 @@ Hapus Image pada table banksoal
 
 Perbaikan pada penamaan title input edit imort banksoal
 
+Penambahan .env pada aplikasi
+
 ALTER TABLE `server` ADD UNIQUE(`kode_server`); 
