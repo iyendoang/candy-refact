@@ -2,7 +2,7 @@
 defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!');
 
 $pesan = '';
-$value = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel WHERE id_mapel='$id'"));
+$value = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel LEFT JOIN mata_pelajaran ON mata_pelajaran.kode_mapel=mapel.id_mapel WHERE mapel.id_mapel='$id'"));
 $tgl_ujian = explode(' ', $value['tgl_ujian']);
 if ($ac == '') :
 ?>
@@ -32,9 +32,12 @@ if ($ac == '') :
                             <tbody>
                                 <?php
                                 if ($pengawas['level'] == 'admin') :
-                                    $mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel ORDER BY date ASC");
+                                    $mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel 
+                                    LEFT JOIN mata_pelajaran ON mata_pelajaran.kode_mapel = mapel.nama 
+                                    ORDER BY date ASC");
                                 elseif ($pengawas['level'] == 'guru') :
-                                    $mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel WHERE idguru='$pengawas[id_pengawas]' ORDER BY date ASC");
+                                    $mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel 
+                                    LEFT JOIN mata_pelajaran ON mata_pelajaran.kode_mapel = mapel.nama WHERE mapel.idguru='$pengawas[id_pengawas]' ORDER BY date ASC");
                                 endif;
                                 ?>
                                 <?php while ($mapel = mysqli_fetch_array($mapelQ)) : ?>
@@ -59,10 +62,10 @@ if ($ac == '') :
                                             }
                                             $guruku = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM pengawas WHERE id_pengawas = '$mapel[idguru]'"));
                                             ?>
-                                            <img src="../dist/img/soal.png" width=45 alt="">
+                                            <!-- <img src="../dist/img/soal.png" width=45 alt=""> -->
                                             <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree<?= $no ?>" class="" aria-expanded="true">
-                                                <span style="font-size:15px"><?= $mapel['kode'] ?> </span>
-                                                <smal>[<?= $mapel['nama'] ?>]</smal> <?= $status ?>
+                                                <span style="font-size:15px"><strong><?= $mapel['kode'] ?></strong></span>
+                                                <smal style="color: #000;">[<?= $mapel['nama_mapel'] ?>]</smal> <?= $status ?>
                                             </a>
                                             <div id="collapseThree<?= $no ?>" class="panel-collapse collapse" aria-expanded="true">
                                                 <div class="box-body">
@@ -87,19 +90,20 @@ if ($ac == '') :
                                                                     echo "<small class='label label-success'>$value </small>&nbsp;";
                                                                 endforeach;
                                                                 ?></p>
-
                                                     <p> Guru : <small class='label label-primary'><?= $guruku['nama'] ?></small></p>
-                                                    <p> Soal Agama : <small class='label label-success'><?= $mapel['soal_agama'] ?></small></p>
-
+                                                    <p> Soal Agama : <?php if ($mapel['soal_agama'] === "") { ?>
+                                                            <small class='label label-warning'>Bukan soal agama</small>
+                                                        <?php } else { ?>
+                                                            <small class='label label-success'><?= $mapel['soal_agama'] ?></small>
+                                                        <?php } ?>
+                                                    </p>
                                                     <?php if ($setting['server'] == 'pusat') : ?>
-
                                                         <div class=''>
                                                             <a href='?pg=<?= $pg ?>&ac=lihat&id=<?= $mapel['id_mapel'] ?>'><button class='btn  btn-success btn-sm'><i class='fa fa-search'></i> Soal</button></a>
                                                             <a href='?pg=<?= $pg ?>&ac=importsoal&id=<?= $mapel['id_mapel'] ?>'><button class='btn btn-info btn-sm'><i class='fa fa-upload'></i> Import</button></a>
                                                             <a><button class='btn btn-warning btn-sm' data-toggle='modal' data-target='#editbanksoal<?= $mapel['id_mapel'] ?>'><i class='fa fa-edit'></i> Edit</button></a>
                                                             <button class="btn btn-primary btn-sm" data-toggle='modal' data-target='#copybanksoal<?= $mapel['id_mapel'] ?>'><i class="fas fa-copy    "></i> Copy Bank</button>
                                                         </div>
-
                                                     <?php endif ?>
                                                 </div>
                                             </div>
@@ -111,7 +115,6 @@ if ($ac == '') :
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h5 class="modal-title">Copy Bank Soal</h5>
-
                                                 </div>
                                                 <form id="formcopybank<?= $mapel['id_mapel'] ?>">
                                                     <div class="modal-body">
@@ -237,15 +240,15 @@ if ($ac == '') :
                                                             <div class='row'>
                                                                 <div class='col-md-3'>
                                                                     <label>Jumlah Soal PG</label>
-                                                                    <input type='number' name='jml_soal' class='form-control' value="<?= $mapel['jml_soal'] ?>" required='true' />
+                                                                    <input type='number' id="edit_soalpg<?= $mapel['id_mapel'] ?>" name='jml_soal' class='form-control' value="<?= $mapel['jml_soal'] ?>" required='true' />
                                                                 </div>
                                                                 <div class='col-md-3'>
                                                                     <label>Bobot Soal PG %</label>
-                                                                    <input type='number' name='bobot_pg' class='form-control' value="<?= $mapel['bobot_pg'] ?>" required='true' />
+                                                                    <input type='number' id="edit_bobotpg<?= $mapel['id_mapel'] ?>" name='bobot_pg' class='form-control' value="<?= $mapel['bobot_pg'] ?>" required='true' />
                                                                 </div>
                                                                 <div class='col-md-3'>
-                                                                    <label>Soal Tampil</label>
-                                                                    <input type='number' name='tampil_pg' class='form-control' value="<?= $mapel['tampil_pg'] ?>" required='true' />
+                                                                    <label>Soal Tampil PG</label>
+                                                                    <input type='number' id="edit_tampilpg<?= $mapel['id_mapel'] ?>" name='tampil_pg' class='form-control' value="<?= $mapel['tampil_pg'] ?>" required='true' />
                                                                 </div>
                                                                 <div class='col-md-3'>
                                                                     <label>Opsi</label>
@@ -268,15 +271,15 @@ if ($ac == '') :
                                                             <div class='row'>
                                                                 <div class='col-md-3'>
                                                                     <label>Jumlah Soal Essai</label>
-                                                                    <input type='number' name='jml_esai' class='form-control' value="<?= $mapel['jml_esai'] ?>" required='true' />
+                                                                    <input type='number' id="edit_soalesai<?= $mapel['id_mapel'] ?>" name='jml_esai' class='form-control' value="<?= $mapel['jml_esai'] ?>" required='true' />
                                                                 </div>
                                                                 <div class='col-md-3'>
                                                                     <label>Bobot Soal Essai %</label>
-                                                                    <input type='number' name='bobot_esai' class='form-control' value="<?= $mapel['bobot_esai'] ?>" required='true' />
+                                                                    <input type='number' id="edit_bobotesai<?= $mapel['id_mapel'] ?>" name='bobot_esai' class='form-control' value="<?= $mapel['bobot_esai'] ?>" required='true' />
                                                                 </div>
                                                                 <div class='col-md-3'>
-                                                                    <label>Soal Tampil</label>
-                                                                    <input type='number' name='tampil_esai' class='form-control' value="<?= $mapel['tampil_esai'] ?>" required='true' />
+                                                                    <label>Soal Tampil Essai</label>
+                                                                    <input type='number' id="edit_tampilesai<?= $mapel['id_mapel'] ?>" name='tampil_esai' class='form-control' value="<?= $mapel['tampil_esai'] ?>" required='true' />
                                                                 </div>
                                                                 <div class='col-md-3'>
                                                                     <label>KKM</label>
@@ -332,13 +335,35 @@ if ($ac == '') :
                                     </div>
                                     <script>
                                         $('#formeditbank<?= $mapel['id_mapel'] ?>').submit(function(e) {
-                                            e.preventDefault();
+                                            var edit_bobotpg = parseInt($('#edit_bobotpg<?= $mapel['id_mapel'] ?>').val());
+                                            var edit_bobotesai = parseInt($('#edit_bobotesai<?= $mapel['id_mapel'] ?>').val());
+                                            var edit_total_bobot = edit_bobotpg + edit_bobotesai;
+                                            var edit_soalpg = parseInt($('#edit_soalpg<?= $mapel['id_mapel'] ?>').val());
+                                            var edit_tampilpg = parseInt($('#edit_tampilpg<?= $mapel['id_mapel'] ?>').val());
+                                            var edit_soalesai = parseInt($('#edit_soalesai<?= $mapel['id_mapel'] ?>').val());
+                                            var edit_tampilesai = parseInt($('#edit_tampilesai<?= $mapel['id_mapel'] ?>').val());
+
+                                            if (edit_total_bobot != 100) {
+                                                swal("Maaf", "Jumlah bobot PG dan bobot Essai harus 100%!", "error");
+                                                return false;
+                                            }
+
+                                            if (edit_tampilpg > edit_soalpg) {
+                                                swal("Maaf", "Soal Tampil PG tidak boleh lebih dari Jumlah Soal PG!", "error");
+                                                return false;
+                                            }
+
+                                            if (edit_tampilesai > edit_soalesai) {
+                                                swal("Maaf", "Soal Tampil Essai tidak boleh lebih dari Jumlah Soal Essai!", "error");
+                                                return false;
+                                            }
+
+                                            // Jika semua validasi berhasil, lanjutkan dengan AJAX request
                                             $.ajax({
                                                 type: 'POST',
                                                 url: 'mod_banksoal/crud_banksoal.php?pg=ubah',
                                                 data: $(this).serialize(),
                                                 success: function(data) {
-
                                                     if (data == "OK") {
                                                         toastr.success("bank soal berhasil dirubah");
                                                     } else {
@@ -350,7 +375,7 @@ if ($ac == '') :
                                                     }, 2000);
                                                 }
                                             });
-                                            return false;
+                                            e.preventDefault(); // prevent the form from submitting
                                         });
                                     </script>
                                 <?php endwhile; ?>
@@ -375,7 +400,6 @@ if ($ac == '') :
                                 <div class="form-group">
                                     <label for="">Kode Bank Soal</label>
                                     <input type="text" class="form-control" name="kode" placeholder="Masukan Kode Bank Soal" required>
-
                                 </div>
                             </div>
                             <div class="col-md-6">
@@ -393,8 +417,6 @@ if ($ac == '') :
                                 </div>
                             </div>
                         </div>
-
-
                         <?php if ($setting['jenjang'] == 'SMK') : ?>
                             <div class='form-group'>
                                 <label>Jurusan</label>
@@ -439,10 +461,10 @@ if ($ac == '') :
                                 </div>
                                 <div class='col-md-3'>
                                     <label>Bobot Soal PG %</label>
-                                    <input type='number' name='bobot_pg' class='form-control' required='true' />
+                                    <input type='number' id='bobotpg' name='bobot_pg' class='form-control' required='true' />
                                 </div>
                                 <div class='col-md-3'>
-                                    <label>Soal Tampil</label>
+                                    <label>Soal Tampil PG</label>
                                     <input type='number' id='tampilpg' name='tampil_pg' class='form-control' required='true' />
                                 </div>
                                 <div class='col-md-3'>
@@ -463,10 +485,10 @@ if ($ac == '') :
                                 </div>
                                 <div class='col-md-3'>
                                     <label>Bobot Soal Essai %</label>
-                                    <input type='number' name='bobot_esai' class='form-control' />
+                                    <input type='number' id="bobotesai" name='bobot_esai' class='form-control' />
                                 </div>
                                 <div class='col-md-3'>
-                                    <label>Soal Tampil</label>
+                                    <label>Soal Tampil Essai</label>
                                     <input type='number' id='tampilesai' name='tampil_esai' class='form-control' />
                                 </div>
                                 <div class='col-md-3'>
@@ -670,7 +692,7 @@ if ($ac == '') :
         $hasil2 = mysqli_query($koneksi, "TRUNCATE TABLE savsoft_qbank");
         $hasil2 = mysqli_query($koneksi, "TRUNCATE TABLE savsoft_options");
     }
-    $namamapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel WHERE id_mapel='$id_mapel'"));
+    $namamapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel LEFT JOIN mata_pelajaran ON mata_pelajaran.kode_mapel=mapel.nama WHERE id_mapel='$id_mapel'"));
     if ($namamapel['jml_esai'] == 0) {
         $hide = 'hidden';
     } else {
@@ -687,7 +709,7 @@ if ($ac == '') :
         <div class='col-md-12'>
             <div class='box box-solid'>
                 <div class='box-header with-border '>
-                    <h3 class='box-title'>Daftar Soal <?= $namamapel['nama'] ?></h3>
+                    <h3 class='box-title'>Daftar Soal [ <span style="color: #000;"><?= $namamapel['kode'] ?></span> ] - <?= $namamapel['nama_mapel'] ?></h3>
                     <div class='box-tools pull-right '>
                         <a href='?pg=<?= $pg ?>&ac=input&id=<?= $id_mapel ?>&no=1&jenis=1' class='btn btn-sm  btn-primary <?= $hidex ?>'><i class='fa fa-plus'></i><span class='hidden-xs'> Add</span> PG</a>
                         <a href='?pg=<?= $pg ?>&ac=input&id=<?= $id_mapel ?>&no=1&jenis=2' class='btn btn-sm btn-warning <?= $hide ?>'><i class='fa fa-plus'></i><span class='hidden-xs'> Add</span> Essai</a>
@@ -996,10 +1018,8 @@ if ($ac == '') :
                                     </table>
                                 </div>
                             </div>
-
                         </div>
                     </div>
-
                 </div><!-- /.box-body -->
             </div><!-- /.box -->
         </div>
@@ -1107,13 +1127,31 @@ if ($ac == '') :
         return false;
     });
     $('#formtambahbank').submit(function(e) {
+        var bobot_pg = parseInt($('#bobotpg').val());
+        var bobot_esai = parseInt($('#bobotesai').val());
+        var total_bobot = bobot_pg + bobot_esai;
+        var jml_soal_pg = parseInt($('#soalpg').val());
+        var tmpil_soal_pg = parseInt($('#tampilpg').val());
+        var jml_soal_esai = parseInt($('#soalesai').val());
+        var tmpil_soal_esai = parseInt($('#tampilesai').val());
+        if (total_bobot != 100) {
+            swal("Maaf", "Jumlah bobot PG dan bobot Essai harus 100%!", "error");
+            return false;
+        }
+        if (tmpil_soal_pg > jml_soal_pg) {
+            swal("Maaf", "Soal Tampil PG tidak boleh lebih dari Jumlah Soal PG!", "error");
+            return false;
+        }
+        if (tmpil_soal_esai > jml_soal_esai) {
+            swal("Maaf", "Soal Tampil Essai tidak boleh lebih dari Jumlah Soal Essai!", "error");
+            return false;
+        }
         e.preventDefault();
         $.ajax({
             type: 'POST',
             url: 'mod_banksoal/crud_banksoal.php?pg=tambah',
             data: $(this).serialize(),
             success: function(data) {
-                console.log(data);
                 if (data == "OK") {
                     toastr.success("bank soal berhasil dibuat");
                 } else {
@@ -1123,7 +1161,6 @@ if ($ac == '') :
                 setTimeout(function() {
                     location.reload();
                 }, 2000);
-
             }
         });
         return false;

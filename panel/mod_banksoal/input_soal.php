@@ -5,7 +5,7 @@ endif;
 $nomor = $_GET['no'];
 $jenis = $_GET['jenis'];
 $id_mapel = $_GET['id'];
-$mapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel WHERE id_mapel='$id_mapel'"));
+$mapel = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM mapel LEFT JOIN mata_pelajaran ON mata_pelajaran.kode_mapel=mapel.nama WHERE id_mapel='$id_mapel'"));
 $jumsoal = mysqli_num_rows(mysqli_query($koneksi, "SELECT * FROM soal WHERE id_mapel='$id_mapel' AND  nomor='$nomor' AND jenis='$jenis'"));
 $soalQ = mysqli_query($koneksi, "SELECT * FROM soal WHERE id_mapel='$id_mapel' AND  nomor='$nomor' AND jenis='$jenis'");
 $soal = mysqli_fetch_array($soalQ);
@@ -25,7 +25,7 @@ if ($mapel['opsi'] == 5) {
 
 					<div class='btn-group' style='margin-top:-5px'>
 						<a class='btn btn-sm btn-primary'>Nama Mapel </a>
-						<a class='btn btn-sm btn-primary'><?= $mapel['nama'] ?> </a>
+						<a class='btn btn-sm btn-primary'><?= $mapel['nama_mapel'] ?> </a>
 					</div>
 					<div class='box-tools pull-right btn-group'>
 
