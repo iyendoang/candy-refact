@@ -1,9 +1,9 @@
 <?php
-$env = parse_ini_file('../.env');
-$host = $env['DB_HOST'];
-$user = $env['DB_USER'];
-$pass = $env['DB_PASS'];
-$debe = $env['DB_NAME'];
+// config.database.php";
+$host = 'localhost';
+$user = 'root';
+$pass = '';
+$debe = 'candy_refactor';
 $koneksi = mysqli_connect($host, $user, $pass, "");
 if ($koneksi) {
 	$pilihdb = mysqli_select_db($koneksi, $debe);

@@ -2,7 +2,7 @@
 session_start();
 error_reporting(0);
 (isset($_SESSION['id_user'])) ? $id_user = $_SESSION['id_user'] : $id_user = 0;
-//JIKA DIINSTAL DISUBDOMAIN HOSTING HAPUS BARIS DIBAWAH INI
+////--> JIKA DIINSTAL DISUBDOMAIN HOSTING HAPUS BARIS DIBAWAH INI -->
 $uri = $_SERVER['REQUEST_URI'];
 $pageurl = explode("/", $uri);
 if ($uri == '/') {
@@ -16,19 +16,16 @@ if ($uri == '/') {
 	(isset($pageurl[3])) ? $ac = $pageurl[3] : $ac = '';
 	(isset($pageurl[4])) ? $id = $pageurl[4] : $id = 0;
 }
-//HAPUS SAMPAI SINI
+////--> HAPUS SAMPAI SINI -->
 
-//JIKA DIINSTAL DISUBDOMAIN HOSTING HAPUS TANDA // BARIS DIBAWAH INI
-
+////-->JIKA DIINSTAL DISUBDOMAIN HOSTING HAPUS TANDA // BARIS DIBAWAH INI -->
 // $uri = $_SERVER['REQUEST_URI'];
 // $pageurl = explode("/",$uri);
-
 // $homeurl = "http://".$_SERVER['HTTP_HOST'];
 // (isset($pageurl[1])) ? $pg = $pageurl[1] : $pg = '';
 // (isset($pageurl[2])) ? $ac = $pageurl[2] : $ac = '';
 // (isset($pageurl[3])) ? $id = $pageurl[3] : $id = 0;
-
-//HAPUS SAMPAI BARIS DIATAS INI
+////--> HAPUS SAMPAI BARIS DIATAS INI  -->
 
 require "config.database.php";
 
