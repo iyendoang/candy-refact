@@ -26,60 +26,37 @@ function youtube($url)
                         <td><?= $materi['mapel'] ?></td>
 
                     </tr>
-
                     <tr>
                         <th>Tgl Publish</th>
                         <td width='10'>:</td>
                         <td><?= $materi['tgl_mulai'] ?></td>
                     </tr>
-
                 </table>
-                <!-- <div class="nav-tabs-custom">
-                    <ul class="nav nav-tabs">
-                        <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Materi & Soal</a></li>
 
-                    </ul>
-                    <div class="tab-content">
-                        <div class="tab-pane active" id="tab_1"> -->
-                <?php if ($materi['file'] <> null) { ?>
-                    Download Materi Pendukung<p>
+                <center>
+                    <div class="callout">
+                        <strong>
+                            <h3><?= $materi['judul'] ?></h3>
+                        </strong>
+                    </div>
+                </center>
+                <?php if ($materi['youtube'] <> null) {  ?>
+                    <div class="col-md-3"></div>
+                    <div class="callout col-md-6">
+                        <?= youtube($materi['youtube']) ?>
+                    </div>
+                    <div class="col-md-3"></div>
+                <?php } ?>
+                <div class="col-md-12" style="font-size: 11pt;">
+                    <?= $materi['materi'] ?>
+                </div>
+                <div class="col-md-12" style="font-size: 11pt; margin-top: 10px">
+                    <?php if ($materi['file'] <> null) { ?>
+                        Download Materi Pendukung <br>
                         <a target="_blank" href='<?= $homeurl ?>/berkas/<?= $materi['file'] ?>' class="btn btn-primary"><?= $materi['file'] ?></a>
                     <?php } ?>
-                    <center>
-                        <div class="callout">
-                            <strong>
-                                <h3><?= $materi['judul'] ?></h3>
-                            </strong>
-                        </div>
-                    </center>
-                    <?php if ($materi['youtube'] <> null) {  ?>
-                        <div class="col-md-3"></div>
-                        <div class="callout col-md-6">
-                            <?= youtube($materi['youtube']) ?>
-                        </div>
-                        <div class="col-md-3"></div>
-                    <?php } ?>
-                    <div class="col-md-12">
-                        <?= $materi['materi'] ?>
-                    </div>
+                </div>
             </div>
-
         </div>
-        <!-- </div>
-            </div>
-        </div> -->
     </div>
 </div>
-<div id="fb-root"></div>
-<script>
-    (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = 'https://connect.facebook.net/id_ID/sdk.js#xfbml=1&version=v6.0&appId=900893573760224';
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="<?= $setting['web'] ?>/<?= $ac ?>" data-numposts="5" data-width="100%"></div>

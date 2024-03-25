@@ -28,10 +28,8 @@ if ($mapel['opsi'] == 5) {
 						<a class='btn btn-sm btn-primary'><?= $mapel['nama_mapel'] ?> </a>
 					</div>
 					<div class='box-tools pull-right btn-group'>
-
 						<button type='submit' name='simpansoal' onclick="tinyMCE.triggerSave(true,true);" class='btn btn-sm btn-primary'><i class='fa fa-check'></i> Simpan</button>
 						<a href='?pg=<?= $pg ?>&ac=lihat&id=<?= $id_mapel ?>' class='btn btn-sm btn-danger'><i class='fa fa-times'></i></a>
-
 					</div>
 				</div><!-- /.box-header -->
 
@@ -404,8 +402,8 @@ if ($mapel['opsi'] == 5) {
 											}
 											echo "
 					</div>
-				</div><!-- /.box-body -->
-			</div><!-- /.box -->
+				</div>
+			</div>
 		</form>
 	</div>
 </div>

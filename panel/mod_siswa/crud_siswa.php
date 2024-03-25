@@ -17,7 +17,6 @@ if ($pg == 'ubah') {
         $pk = 'semua';
     }
     if ($_POST['pass1'] <> '') {
-
         $data = [
             'id_kelas'     => $_POST['id_kelas'],
             'idpk'         => $pk,

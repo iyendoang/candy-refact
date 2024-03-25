@@ -238,31 +238,27 @@ endif;
 							</li>
 						<?php endif ?>
 						<li class='treeview'><a href='?pg=siswa'><i class="fas fa-user-friends side-menu-icon fa-fw   "></i> <span>Peserta Ujian</span></a></li>
-						<!-- <li class='treeview'>
+						<li class='treeview'>
 							<a href='#'><i class="fas fa-edit side-menu-icon fa-fw"></i><span> E-Learning </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
 								<li><a href='?pg=materi'><i class='fas fa-angle-double-right fa-fw'></i> <span> Materi Belajar</span></a></li>
-								<li><a href='?pg=tugas'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Tugas Terstruktur</span></a></li>
+								<li><a href='?pg=tugas'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Tugas</span></a></li>
 
 							</ul>
-						</li> -->
-
+						</li>
 						<li class='treeview'>
 							<a href='#'><i class="fas fa-envelope-open-text side-menu-icon fa-fw"></i><span> Bank Soal </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
 								<li><a href='?pg=banksoal'><i class='fas fa-angle-double-right fa-fw'></i> <span> Daftar Soal</span></a></li>
 								<li><a href='?pg=filependukung'><i class='fas fa-angle-double-right  fa-fw'></i> <span>File Pendukung</span></a></li>
-
 							</ul>
 						</li>
 						<li><a href='?pg=statusall'><i class="fas fa-user-friends side-menu-icon fa-fw    "></i> <span>Status Peserta</span></a></li>
-						<!-- <li><a href='?pg=jadwal'><i class="fas fa-desktop side-menu-icon fa-fw"></i> <span> Status Ujian</span></a></li> -->
 						<li class='treeview'>
 							<a href='#'><i class="fas fa-desktop side-menu-icon fa-fw"></i><span> Menu Ujian </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
 								<li><a href='?pg=jadwal'><i class='fas fa-angle-double-right fa-fw'></i> <span> Jadwal Ujian</span></a></li>
 								<li style="display: none;"><a href='?pg=reset'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Reset Ujian</span></a></li>
-
 							</ul>
 						</li>
 						<li class='treeview'>
@@ -283,7 +279,6 @@ endif;
 								<li><a href='?pg=berita'><i class='fas fa-angle-double-right fa-fw'></i> <span> Berita Acara</span></a></li>
 							</ul>
 						</li>
-
 						<li class='treeview'><a href='?pg=pengumuman'><i class="fas fa-bullhorn side-menu-icon fa-fw"></i> <span> Pengumuman</span></a></li>
 						<li class='treeview'>
 							<a href='#'><i class="fas fa-users-cog side-menu-icon fa-fw"></i> <span>Manajemen User</span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
@@ -301,10 +296,9 @@ endif;
 						<li class='treeview'><a href='?pg=siswa'><i class="fas side-menu-icon fa-user-friends fa-lg fa-fw"></i> <span>Peserta Ujian</span></a></li>
 						<li><a href='?pg=editguru'><i class="fas side-menu-icon fa-users-cog fa-fw"></i> <span>Profil Saya</span></a></li>
 						<li><a href='?pg=banksoal'><i class="fas side-menu-icon fa-envelope-open-text fa-fw"></i> <span>Bank Soal</span></a></li>
-						<!-- <li><a href='?pg=materi'><i class='fas fa-file side-menu-icon fa-fw'></i> <span> Materi</span></a></li>
-						<li><a href='?pg=tugas'><i class="fas side-menu-icon fa-edit fa-fw"></i> <span>Tugas Terstruktur</span></a></li> -->
+						<li><a href='?pg=materi'><i class='fas fa-file side-menu-icon fa-fw'></i> <span> Materi</span></a></li>
+						<li><a href='?pg=tugas'><i class="fas side-menu-icon fa-edit fa-fw"></i> <span>Tugas</span></a></li>
 						<li><a href='?pg=jadwal'><i class="fas fa-business-time   side-menu-icon fa-fw"></i> <span> Jadwal Ujian</span></a></li>
-
 						<li><a href='?pg=nilaiujian'><i class='fas fa-file-signature side-menu-icon fa-fw'></i> <span>Hasil Nilai</span></a></li>
 						<?php if ($pengawas['jabatan'] <> '') { ?>
 							<li class='treeview'>
@@ -320,8 +314,6 @@ endif;
 					<?php if ($pengawas['level'] == 'pengawas') : ?>
 						<li class='treeview'><a href='?pg=siswa'><i class="fas side-menu-icon fa-user-friends fa-lg fa-fw"></i> <span>Peserta Ujian</span></a></li>
 						<li><a href='?pg=statussiswa'><i class="fas side-menu-icon fa-users-cog fa-fw"></i> <span>Status Peserta</span></a></li>
-
-
 					<?php endif ?>
 					<hr style="margin:0px">
 					<?php
@@ -333,10 +325,9 @@ endif;
 						$jenjang = 'SD/MI';
 					}
 					?>
-				</ul><!-- /.sidebar-menu -->
+				</ul>
 			</section>
 		</aside>
-
 		<div class='content-wrapper' style="background: #ecf0f5;">
 			<section class='content-header' style="color: black;">
 				<h1>
@@ -350,8 +341,8 @@ endif;
 			</section>
 			<section class='content'>
 				<?php include "content.php"; ?>
-			</section><!-- /.content -->
-		</div><!-- /.content-wrapper -->
+			</section>
+		</div>
 		<footer class='main-footer hidden-xs'>
 			<div class='container'>
 				<div class='pull-left hidden-xs'>
@@ -361,7 +352,6 @@ endif;
 						</span>
 					</strong>
 				</div>
-
 		</footer>
 	</div><!-- ./wrapper -->
 

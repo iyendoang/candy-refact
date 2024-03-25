@@ -454,3 +454,24 @@ function lamaujian($seconds)
 	}
 	return $string;
 }
+function tanggal_indo($tanggal, $format = 'l, j F Y') {
+    $hari = array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
+    $bulan = array(
+        'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+        'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    );
+
+    $tanggal = strtotime($tanggal);
+    $hari_ini = date('w', $tanggal);
+    $hari_ini = $hari[$hari_ini];
+
+    $tanggal = date($format, $tanggal);
+    $tanggal = str_replace(array('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'),
+        array('Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu', 'Minggu'), $tanggal);
+
+    $tanggal = str_replace(array('January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'),
+        array('Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni', 'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'), $tanggal);
+
+    return $tanggal;
+}
+

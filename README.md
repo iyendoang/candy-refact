@@ -47,4 +47,11 @@ Perbaikan pada penamaan title input edit imort banksoal
 
 Penambahan .env pada aplikasi
 
+Penambahan Elearning
+Materi dan tugas baik di admin, guru dan siswa
+
 ALTER TABLE `server` ADD UNIQUE(`kode_server`); 
+[2.59 PM, 25/3/2024] Iyen: 
+ALTER TABLE materi CHANGE judul judul VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;
+[3.01 PM, 25/3/2024] Iyen: 
+ALTER TABLE tugas CHANGE judul judul VARCHAR(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL;

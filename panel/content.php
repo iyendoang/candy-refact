@@ -30,7 +30,7 @@
 <?php elseif ($pg == 'tugas') : ?>
     <?php include 'mod_tugas/tugas.php'; ?>
 <?php elseif ($pg == 'materi') : ?>
-    <?php include 'materi/materi.php'; ?>
+    <?php include 'mod_materi/materi.php'; ?>
 <?php elseif ($pg == 'nilaiujian') : ?>
     <?php include 'mod_nilai/nilaiujian2.php'; ?>
 <?php elseif ($pg == 'nilai') : ?>

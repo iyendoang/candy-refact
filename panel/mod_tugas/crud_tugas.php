@@ -110,11 +110,14 @@ if ($pg == 'hapus_nilai') {
     $exec = mysqli_query($koneksi, "DELETE FROM jawaban_tugas WHERE id_jawaban='$kode'");
 }
 if ($pg == 'simpan_nilai') {
-    $kode = $_POST['id'];
-    $nilai = $_POST['nilai' . $kode];
-    $query = mysqli_query($koneksi, "UPDATE jawaban_tugas set nilai='$nilai' where id_jawaban = '$kode'");
-    echo mysqli_error($koneksi);
-    echo "nilai berhasil disimpan";
+    $kode = $_POST['id_jawaban'];
+    $nilai = $_POST['nilai'];
+    $query = mysqli_query($koneksi, "UPDATE jawaban_tugas SET nilai='$nilai' WHERE id_jawaban = '$kode'");
+    if ($query) {
+        echo "Nilai berhasil disimpan";
+    } else {
+        echo "Gagal menyimpan nilai: " . mysqli_error($koneksi);
+    }
 }
 if ($pg == 'hapus_tugas') {
     $kode = $_POST['id'];

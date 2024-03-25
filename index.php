@@ -18,8 +18,8 @@ $tglsekarang = time();
 <!DOCTYPE html>
 <html>
 
-<head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
     <title><?= $setting['aplikasi'] ?></title>
     <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' />
@@ -196,11 +196,13 @@ $tglsekarang = time();
                 <ul class='sidebar-menu tree' data-widget='tree'>
                     <li class='header'>Main Menu Peserta Ujian</li>
                     <li><a href='<?= $homeurl ?>'><i class='fas fa-tachometer-alt fa-fw  '></i> <span> Dashboard</span></a></li>
+                    <!-- <li><a href='<?= $homeurl ?>/materi'><i class='fas fa-file fa-fw  '></i> <span> materi</span></a></li> -->
                     <li><a href='<?= $homeurl ?>/jadwal'><i class='fas fa-calendar fa-fw  '></i> <span> Jadwal Ujian</span></a></li>
-                    <!-- <li><a href='<?= $homeurl ?>/materi'><i class='fas fa-file fa-fw  '></i> <span> Materi Belajar</span></a></li>
-                    <li><a href='<?= $homeurl ?>/tugassiswa'><i class='fas fa-edit fa-fw  '></i> <span> Tugas Siswa</span></a></li> -->
+                    <li><a href='<?= $homeurl ?>/materi'><i class='fas fa-file fa-fw  '></i> <span> Materi Belajar</span></a></li>
+                    <li><a href='<?= $homeurl ?>/tugassiswa'><i class='fas fa-edit fa-fw  '></i> <span> Tugas Siswa</span></a></li>
                     <li><a href='<?= $homeurl ?>/hasil'><i class='fas fa-tags fa-fw '></i> <span> Hasil Ujian</span></a></li>
-                </ul><!-- /.sidebar-menu -->
+                    <li><a href='<?= $homeurl ?>/profile'><i class='fas fa-user fa-fw  '></i> <span> Pengaturan Akun</span></a></li>
+                </ul>
             </section>
         </aside>
         <div class='content-wrapper' style='background-image: url(dist/backgroun.jpg);background-size: cover;'>
@@ -209,7 +211,6 @@ $tglsekarang = time();
             <section class='content' style="margin-top:-95px">
                 <?php if ($pg == '') : ?>
                     <div class='row'>
-                      
                         <div class='col-md-12'>
                             <div class='box box-solid'>
                                 <div class='box-header with-border'>
@@ -264,8 +265,6 @@ $tglsekarang = time();
                             </div>
                         </div>
                     </div>
-                    
-                        
                 <?php elseif ($pg == 'jadwal') : ?>
                     <div class='row'>
                         <div class='col-md-12'>
@@ -544,13 +543,14 @@ $tglsekarang = time();
                     
                 <?php elseif ($pg == 'tugassiswa') : ?>
                     <?php include "tugas.php" ?>
+                <?php elseif ($pg == 'profile') : ?>
+                    <?php include "profile.php" ?>
                 <?php elseif ($pg == 'materi') : ?>
                     <?php include "materi.php" ?>
                 <?php elseif ($pg == 'lihattugas') : ?>
                     <?php include "lihattugas.php" ?>
-                    <?php elseif ($pg == 'lihatmateri') : ?>
+                <?php elseif ($pg == 'lihatmateri') : ?>
                     <?php include "lihatmateri.php" ?>
-              
                 <?php elseif ($pg == 'lihathasil') : ?>
                     <?php
                     $ac = dekripsi($ac);
@@ -706,7 +706,6 @@ $tglsekarang = time();
                                         <ul class="nav nav-tabs">
                                             <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Hasil Ujian</a></li>
                                             <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="true">Hasil Tugas</a></li>
-                    
                                         </ul>
                                         <div class="tab-content">
                                             <div class="tab-pane active" id="tab_1">
@@ -903,8 +902,7 @@ $tglsekarang = time();
                             </div>
 
                         </div>
-                        
-                    <?php else : ?>
+                <?php else : ?>
                         <?php jump($homeurl); ?>
                     <?php endif; ?>
                 <?php else : ?>
