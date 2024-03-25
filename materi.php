@@ -63,7 +63,7 @@ defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!'
                 <?php
                 $no = 1;
                 $siswa = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM siswa WHERE id_siswa='$_SESSION[id_siswa]'"));
-                $mapelQ = mysqli_query($koneksi, "SELECT * FROM materi");
+                $mapelQ = mysqli_query($koneksi, "SELECT * FROM materi ORDER BY id_materi DESC");
                 ?>
                 <table id="example1" class='table table-bordered table-striped  table-hover'>
                     <thead>

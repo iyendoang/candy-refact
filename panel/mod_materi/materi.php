@@ -29,9 +29,7 @@
                                             <option value=''>Pilih Mata Pelajaran</option>
                                             <?php $que = mysqli_query($koneksi, "SELECT * FROM mata_pelajaran"); ?>
                                             <?php while ($mapel = mysqli_fetch_array($que)) : ?>
-
                                                 <option value="<?= $mapel['nama_mapel'] ?>"><?= $mapel['nama_mapel'] ?></option>"
-
                                             <?php endwhile ?>
                                         </select>
                                     </div>
@@ -95,9 +93,9 @@
                         <tbody>
                             <?php
                             if ($pengawas['level'] == 'guru') {
-                                $materiQ = mysqli_query($koneksi, "SELECT * FROM materi where id_guru='$_SESSION[id_pengawas]'");
+                                $materiQ = mysqli_query($koneksi, "SELECT * FROM materi where id_guru='$_SESSION[id_pengawas]' ORDER BY id_materi DESC");
                             } else {
-                                $materiQ = mysqli_query($koneksi, "SELECT * FROM materi ");
+                                $materiQ = mysqli_query($koneksi, "SELECT * FROM materi ORDER BY id_materi DESC");
                             }
                             ?>
                             <?php while ($materi = mysqli_fetch_array($materiQ)) : ?>

@@ -2,7 +2,7 @@
 defined('APLIKASI') or exit('Anda tidak dizinkan mengakses langsung script ini!');
 $ac = dekripsi($ac);
 echo $ac;
-$materi = mysqli_fetch_array(mysqli_query($koneksi, "select * from materi where id_materi='$ac'"));
+$materi = mysqli_fetch_array(mysqli_query($koneksi, "SELECT * FROM materi WHERE id_materi='$ac'"));
 function youtube($url)
 {
     $link = str_replace('http://www.youtube.com/watch?v=', '', $url);
@@ -15,7 +15,6 @@ function youtube($url)
     <div class='col-md-12'>
         <div class='box box-solid'>
             <div class='box-header with-border'>
-
                 <h3 class='box-title'><i class="fas fa-file-signature    "></i> Detail materi Siswa</h3>
             </div><!-- /.box-header -->
             <div class='box-body'>
@@ -24,7 +23,6 @@ function youtube($url)
                         <th width='150'>Mata Pelajaran</th>
                         <td width='10'>:</td>
                         <td><?= $materi['mapel'] ?></td>
-
                     </tr>
                     <tr>
                         <th>Tgl Publish</th>
@@ -32,7 +30,6 @@ function youtube($url)
                         <td><?= $materi['tgl_mulai'] ?></td>
                     </tr>
                 </table>
-
                 <center>
                     <div class="callout">
                         <strong>
