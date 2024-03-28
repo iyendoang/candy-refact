@@ -3,7 +3,8 @@
 $host = 'localhost';
 $user = 'root';
 $pass = '';
-$debe = 'candy_refactor';
+// $debe = 'candy_refactor';
+$debe = 'candy_test';
 $koneksi = mysqli_connect($host, $user, $pass, "");
 if ($koneksi) {
 	$pilihdb = mysqli_select_db($koneksi, $debe);

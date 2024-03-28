@@ -7,7 +7,7 @@
                 <div class='box-tools pull-right '>
                     <button id='btnabsen' class='btn btn-sm btn-flat btn-success' onclick="frames['frameresult'].print()"><i class='fa fa-print'></i> Print</button>
                 </div>
-            </div><!-- /.box-header -->
+            </div>
             <div class='box-body'>
                 <?= $info ?>
                 <div class='form-group'>
@@ -44,8 +44,8 @@
                         </select>
                     </div>
                 </div>
-            </div><!-- /.box-body -->
-        </div><!-- /.box -->
+            </div>
+        </div>
     </div>
 </div>
 <iframe id='loadabsen' name='frameresult' src='mod_absen/print_absen.php' style='border:none;width:0px;height:0px;'></iframe>

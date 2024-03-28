@@ -7,6 +7,7 @@ require("../../config/dis.php");
 ($id_pengawas == 0) ? header('location:login.php') : null;
 echo "<style> .str{ mso-number-format:\@; } </style>";
 $id_kelas = $_GET['k'];
+$id_penilaian = $_GET['idj'];
 $pengawas = fetch($koneksi, 'pengawas', array('id_pengawas' => $id_pengawas));
 $mapel = fetch($koneksi, 'mapel', array('id_mapel' => null));
 $kelas = fetch($koneksi, 'kelas', array('id_kelas' => $id_kelas));
@@ -37,7 +38,7 @@ REKAP NILAI HASIL UJIAN
 			<th style='text-align:center;vertical-align:middle' rowspan='3'>Kelas</th>
 			<?php
 			$kodeujian = mysqli_fetch_array(mysqli_query($koneksi, "select * from jenis where status='aktif'"));
-			$mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel a JOIN nilai b ON a.id_mapel=b.id_mapel where b.kode_ujian='$kodeujian[id_jenis]' GROUP BY b.id_mapel ");
+			$mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel a JOIN nilai b ON a.id_mapel=b.id_mapel where b.kode_ujian='$id_penilaian'  AND (a.kelas LIKE '%\"$id_kelas\"%' OR a.kelas LIKE '%\"semua\"%')   GROUP BY b.id_mapel ");
 			while ($mapel = mysqli_fetch_array($mapelQ)) :
 				echo "<th style='text-align:center' colspan='4'>" . strtoupper($mapel['kode']) . "-$mapel[nama]</th>";
 			endwhile;
@@ -45,14 +46,14 @@ REKAP NILAI HASIL UJIAN
 		</tr>
 		<tr>
 			<?php
-			$kode = mysqli_query($koneksi, "SELECT * FROM mapel a JOIN nilai b ON a.id_mapel=b.id_mapel where b.kode_ujian='$kodeujian[id_jenis]' GROUP BY b.id_mapel");
+			$kode = mysqli_query($koneksi, "SELECT * FROM mapel a JOIN nilai b ON a.id_mapel=b.id_mapel where b.kode_ujian='$id_penilaian'  AND (a.kelas LIKE '%\"$id_kelas\"%' OR a.kelas LIKE '%\"semua\"%')   GROUP BY b.id_mapel");
 			while ($mapel = mysqli_fetch_array($kode)) :
 				echo "<th style='text-align:center' colspan='4'>$mapel[kode_ujian]</th>";
 			endwhile;
 			?>
 		</tr>
 		<tr>
-			<?php $mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel a JOIN nilai b ON a.id_mapel=b.id_mapel where b.kode_ujian='$kodeujian[id_jenis]' GROUP BY b.id_mapel "); ?>
+			<?php $mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel a JOIN nilai b ON a.id_mapel=b.id_mapel where b.kode_ujian='$id_penilaian'  AND (a.kelas LIKE '%\"$id_kelas\"%' OR a.kelas LIKE '%\"semua\"%')   GROUP BY b.id_mapel "); ?>
 			<?php while ($mapel = mysqli_fetch_array($mapelQ)) : ?>
 				<th style='text-align:center'>B</th>
 				<th style='text-align:center'>S</th>
@@ -74,7 +75,7 @@ REKAP NILAI HASIL UJIAN
 				<td style="text-align:center" class="str"><?= $siswa['no_peserta'] ?></td>
 				<td><?= $siswa['nama'] ?></td>
 				<td style="text-align:center"><?= $siswa['id_kelas'] ?></td>
-				<?php $mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel a JOIN nilai b ON a.id_mapel=b.id_mapel where b.kode_ujian='$kodeujian[id_jenis]' GROUP BY b.id_mapel "); ?>
+				<?php $mapelQ = mysqli_query($koneksi, "SELECT * FROM mapel a JOIN nilai b ON a.id_mapel=b.id_mapel where b.kode_ujian='$id_penilaian'  AND (a.kelas LIKE '%\"$id_kelas\"%' OR a.kelas LIKE '%\"semua\"%')   GROUP BY b.id_mapel "); ?>
 				<?php while ($mapel = mysqli_fetch_array($mapelQ)) : ?>
 					<?php
 					$nilaiQ = mysqli_query($koneksi, "SELECT * FROM nilai WHERE id_mapel='$mapel[id_mapel]' AND id_siswa='$siswa[id_siswa]' ");

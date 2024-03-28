@@ -31,7 +31,7 @@ endif;
 	<meta http-equiv='X-UA-Compatible' content='IE=edge'>
 	<title>Administrator | <?= $setting['aplikasi'] ?></title>
 	<meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
-    <link rel='shortcut icon' href='<?= $homeurl ?>/dist/img/book.ico' />
+	<link rel='shortcut icon' href='<?= $homeurl ?>/dist/img/book.ico' />
 	<link rel='stylesheet' href='<?= $homeurl ?>/dist/bootstrap/css/bootstrap.min.css' />
 	<link rel='stylesheet' href='<?= $homeurl ?>/plugins/fontawesome/css/all.css' />
 	<link rel='stylesheet' href='<?= $homeurl ?>/plugins/select2/select2.min.css' />
@@ -264,8 +264,8 @@ endif;
 						<li class='treeview'>
 							<a href='#'><i class="fas fa-file-signature side-menu-icon fa-fw"></i><span> Nilai </span><span class='pull-right-container'> <i class='fa fa-angle-down pull-right'></i> </span></a>
 							<ul class='treeview-menu'>
-								<li><a href='?pg=nilaiujian'><i class='fas fa-angle-double-right fa-fw'></i> <span> Hasil Nilai</span></a></li>
-								<li><a href='?pg=semuanilai'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Semua Nilai</span></a></li>
+								<li><a href='?pg=nilaiujian'><i class='fas fa-angle-double-right fa-fw'></i> <span> Hasil Ujian</span></a></li>
+								<li><a href='?pg=semuanilai'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Leger Nilai</span></a></li>
 								<?php if ($setting['server'] == 'lokal') : ?>
 									<li><a href='?pg=dataujian'><i class='fas fa-angle-double-right fa-fw'></i> <span>Kirim Nilai</span></a></li>
 								<?php endif ?>
@@ -307,6 +307,7 @@ endif;
 									<li><a href='?pg=siswabinaan'><i class='fas fa-angle-double-right fa-fw'></i> <span> Siswa Binaan</span></a></li>
 									<li><a href='?pg=progress'><i class='fas fa-angle-double-right fa-fw'></i> <span> Progress Ujian</span></a></li>
 									<li><a href='?pg=rekap'><i class='fas fa-angle-double-right fa-fw'></i> <span> Rekap Ujian</span></a></li>
+									<li><a href='?pg=semuanilai'><i class='fas fa-angle-double-right  fa-fw'></i> <span>Leger Nilai</span></a></li>
 								</ul>
 							</li>
 						<?php } ?>
@@ -638,7 +639,7 @@ endif;
 							[2, 'namajenis'],
 							[3, 'status', '{"aktif": "aktif", "tidak": "tidak"}']
 						]
-					}
+					},
 				});
 			});
 		<?php endif; ?>

@@ -27,7 +27,15 @@ if (isset($_GET['pg'])) {
                 mysqli_query($koneksi, "UPDATE jenis SET nama='" . $input['namajenis'] . "', status='" . $input['status'] . "' WHERE id_jenis='" . $input['id'] . "'");
             }
         } else if ($input['action'] === 'delete') {
-            mysqli_query($koneksi, "DELETE FROM jenis WHERE id_jenis='" . $input['id'] . "'");
+            $input_id = $input['id'];
+            $check_query = mysqli_query($koneksi, "SELECT * FROM nilai WHERE kode_ujian='$input_id'");
+            $kode_ujian_exists = mysqli_num_rows($check_query) > 0;
+            if ($kode_ujian_exists) {
+                echo "Tidak dapat menghapus jenis penilaian ini karena masih terdapat data yang terkait.";
+            } else {
+                mysqli_query($koneksi, "DELETE FROM jenis WHERE id_jenis='$input_id'");
+                echo "Jenis penilaian berhasil dihapus.";
+            }
         }
     }
     if ($pg == 'level') {
